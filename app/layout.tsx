@@ -9,9 +9,10 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "OpenCode Cafe - Extensions & Plugins Marketplace",
+  metadataBase: new URL("https://opencode.cafe"),
+  title: "opencode.cafe - Extensions & Plugins for OpenCode",
   description:
-    "Discover, share, and collaborate on extensions and plugins for OpenCode. The community marketplace for developer tools.",
+    "Discover community-built extensions and plugins to enhance your OpenCode experience. Share your own creations and collaborate with developers worldwide.",
 };
 
 export default function RootLayout({
