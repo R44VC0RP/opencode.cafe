@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# opencode.cafe
+
+A marketplace for OpenCode extensions and plugins. Built with Next.js 16 and the OpenCode design system.
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+bun install
+bun run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Design System
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project uses the OpenCode design system - a monospace-first, minimal design system inspired by terminal aesthetics.
 
-## Learn More
+**Key features:**
+- Monospace typography (IBM Plex Mono)
+- Warm neutral color palette
+- Yellow-green accent (`hsl(62, 84%, 88%)`) for interactive elements
+- System-aware dark mode
 
-To learn more about Next.js, take a look at the following resources:
+Visit `/design-system` to see all components in action.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+app/
+  page.tsx              # Homepage (extension marketplace)
+  design-system/        # Design system demo page
+  globals.css           # Design system CSS variables
+components/
+  ui/                   # shadcn/ui components (customized)
+```
 
-## Deploy on Vercel
+## Tech Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Next.js 16](https://nextjs.org) - React framework
+- [Tailwind CSS v4](https://tailwindcss.com) - Styling
+- [shadcn/ui](https://ui.shadcn.com) - Component library
+- [Bun](https://bun.sh) - Package manager & runtime
