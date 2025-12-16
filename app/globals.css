@@ -1,0 +1,316 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================================
+   OpenCode Design System
+   
+   A monospace-first, minimal design system inspired by terminal aesthetics.
+   Uses warm neutral grays with a yellow-green accent for interactive elements.
+   ============================================================================ */
+
+:root {
+  /* ==========================================================================
+     Core Color Tokens - Light Mode
+     ========================================================================== */
+  
+  /* Backgrounds */
+  --color-bg: hsl(0, 20%, 99%);
+  --color-bg-weak: hsl(0, 8%, 97%);
+  --color-bg-weak-hover: hsl(0, 8%, 94%);
+  --color-bg-strong: hsl(0, 5%, 12%);
+  --color-bg-strong-hover: hsl(0, 5%, 18%);
+  --color-bg-interactive: hsl(62, 84%, 88%);
+  --color-bg-interactive-weak: hsl(64, 74%, 95%);
+
+  /* Text */
+  --color-text: hsl(0, 1%, 39%);
+  --color-text-weak: hsl(0, 1%, 60%);
+  --color-text-weaker: hsl(30, 2%, 81%);
+  --color-text-strong: hsl(0, 5%, 12%);
+  --color-text-inverted: hsl(0, 20%, 99%);
+
+  /* Borders */
+  --color-border: hsl(30, 2%, 81%);
+  --color-border-weak: hsl(0, 1%, 85%);
+
+  /* Icons */
+  --color-icon: hsl(0, 1%, 55%);
+
+  /* Semantic Colors */
+  --color-success: hsl(142, 71%, 45%);
+  --color-warning: hsl(38, 92%, 50%);
+  --color-danger: hsl(0, 84%, 60%);
+
+  /* ==========================================================================
+     Spacing Scale (4px base unit)
+     ========================================================================== */
+  --space-0: 0;
+  --space-px: 1px;
+  --space-0-5: 0.125rem;   /* 2px */
+  --space-1: 0.25rem;      /* 4px */
+  --space-1-5: 0.375rem;   /* 6px */
+  --space-2: 0.5rem;       /* 8px */
+  --space-2-5: 0.625rem;   /* 10px */
+  --space-3: 0.75rem;      /* 12px */
+  --space-4: 1rem;         /* 16px */
+  --space-5: 1.25rem;      /* 20px */
+  --space-6: 1.5rem;       /* 24px */
+  --space-8: 2rem;         /* 32px */
+  --space-10: 2.5rem;      /* 40px */
+  --space-12: 3rem;        /* 48px */
+  --space-16: 4rem;        /* 64px */
+  --space-20: 5rem;        /* 80px */
+  --space-24: 6rem;        /* 96px */
+
+  /* ==========================================================================
+     Typography Scale
+     ========================================================================== */
+  --font-size-2xs: 0.6875rem;  /* 11px */
+  --font-size-xs: 0.75rem;     /* 12px */
+  --font-size-sm: 0.8125rem;   /* 13px */
+  --font-size-md: 0.9375rem;   /* 15px */
+  --font-size-lg: 1.125rem;    /* 18px */
+  --font-size-xl: 1.25rem;     /* 20px */
+  --font-size-2xl: 1.5rem;     /* 24px */
+  --font-size-3xl: 1.875rem;   /* 30px */
+  --font-size-4xl: 2.25rem;    /* 36px */
+
+  /* ==========================================================================
+     Border Radius (Sharp, minimal)
+     ========================================================================== */
+  --radius-sm: 0.1875rem;  /* 3px */
+  --radius-md: 0.3125rem;  /* 5px */
+  --radius-lg: 0.5rem;     /* 8px */
+  --radius: 0.375rem;      /* 6px - Base for shadcn calculations */
+
+  /* ==========================================================================
+     Layout
+     ========================================================================== */
+  --padding: 5rem;
+  --vertical-padding: 4rem;
+  --container-max-width: 67.5rem;  /* 1080px */
+
+  /* ==========================================================================
+     Shadcn/UI Variable Mappings
+     ========================================================================== */
+  --background: var(--color-bg);
+  --foreground: var(--color-text-strong);
+  
+  --card: var(--color-bg);
+  --card-foreground: var(--color-text-strong);
+  
+  --popover: var(--color-bg);
+  --popover-foreground: var(--color-text-strong);
+  
+  --primary: var(--color-bg-strong);
+  --primary-foreground: var(--color-text-inverted);
+  
+  --secondary: var(--color-bg-weak);
+  --secondary-foreground: var(--color-text-strong);
+  
+  --muted: var(--color-bg-weak);
+  --muted-foreground: var(--color-text-weak);
+  
+  --accent: var(--color-bg-weak);
+  --accent-foreground: var(--color-text-strong);
+  
+  --destructive: var(--color-danger);
+  --destructive-foreground: var(--color-text-inverted);
+  
+  --border: var(--color-border);
+  --input: var(--color-border);
+  --ring: var(--color-bg-interactive);
+}
+
+/* ==========================================================================
+   Dark Mode
+   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Backgrounds */
+    --color-bg: hsl(0, 9%, 7%);
+    --color-bg-weak: hsl(0, 6%, 10%);
+    --color-bg-weak-hover: hsl(0, 6%, 15%);
+    --color-bg-strong: hsl(0, 15%, 94%);
+    --color-bg-strong-hover: hsl(0, 15%, 97%);
+    --color-bg-interactive: hsl(62, 100%, 90%);
+    --color-bg-interactive-weak: hsl(60, 20%, 8%);
+
+    /* Text */
+    --color-text: hsl(0, 4%, 71%);
+    --color-text-weak: hsl(0, 2%, 49%);
+    --color-text-weaker: hsl(0, 3%, 28%);
+    --color-text-strong: hsl(0, 15%, 94%);
+    --color-text-inverted: hsl(0, 9%, 7%);
+
+    /* Borders */
+    --color-border: hsl(0, 3%, 28%);
+    --color-border-weak: hsl(0, 4%, 23%);
+
+    /* Icons */
+    --color-icon: hsl(10, 3%, 43%);
+
+    /* Semantic */
+    --color-danger: hsl(0, 72%, 63%);
+  }
+}
+
+/* Dark class override (for manual toggle) */
+.dark {
+  /* Backgrounds */
+  --color-bg: hsl(0, 9%, 7%);
+  --color-bg-weak: hsl(0, 6%, 10%);
+  --color-bg-weak-hover: hsl(0, 6%, 15%);
+  --color-bg-strong: hsl(0, 15%, 94%);
+  --color-bg-strong-hover: hsl(0, 15%, 97%);
+  --color-bg-interactive: hsl(62, 100%, 90%);
+  --color-bg-interactive-weak: hsl(60, 20%, 8%);
+
+  /* Text */
+  --color-text: hsl(0, 4%, 71%);
+  --color-text-weak: hsl(0, 2%, 49%);
+  --color-text-weaker: hsl(0, 3%, 28%);
+  --color-text-strong: hsl(0, 15%, 94%);
+  --color-text-inverted: hsl(0, 9%, 7%);
+
+  /* Borders */
+  --color-border: hsl(0, 3%, 28%);
+  --color-border-weak: hsl(0, 4%, 23%);
+
+  /* Icons */
+  --color-icon: hsl(10, 3%, 43%);
+
+  /* Semantic */
+  --color-danger: hsl(0, 72%, 63%);
+}
+
+/* ==========================================================================
+   Responsive Layout Adjustments
+   ========================================================================== */
+@media (max-width: 60rem) {
+  :root {
+    --padding: 1.5rem;
+    --vertical-padding: 3rem;
+  }
+}
+
+/* ==========================================================================
+   Tailwind Theme Integration
+   ========================================================================== */
+@theme inline {
+  /* Colors */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Border Radius */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Typography - Monospace everywhere */
+  --font-sans: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  /* Text selection highlight - Yellow-green accent */
+  ::selection {
+    background: var(--color-bg-interactive);
+    color: var(--color-text-strong);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    ::selection {
+      background: var(--color-bg-interactive);
+      color: var(--color-text-inverted);
+    }
+  }
+
+  /* Links - no underline by default, add explicitly when needed */
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* Headings */
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--color-text-strong);
+    font-weight: 600;
+    text-wrap: balance;
+  }
+
+  /* Paragraphs */
+  p {
+    line-height: 1.75;
+    text-wrap: pretty;
+  }
+
+  /* Code */
+  code {
+    font-family: var(--font-mono);
+  }
+}
+
+/* ==========================================================================
+   Component Overrides
+   ========================================================================== */
+@layer components {
+  /* Focus ring using the yellow-green accent */
+  .focus-ring {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  /* Input focus with yellow-green ring */
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    border-color: var(--color-bg-strong);
+    box-shadow: 0 0 0 3px var(--color-bg-interactive);
+    outline: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    input:focus-visible,
+    textarea:focus-visible,
+    select:focus-visible {
+      border-color: var(--color-bg-interactive);
+      box-shadow: none;
+    }
+  }
+}
