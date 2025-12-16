@@ -1,9 +1,9 @@
 "use client"
 
 import { useState } from "react"
-import Image from "next/image"
 import { AlertCircle, Check, ChevronDown, Info, Terminal, Settings, User } from "lucide-react"
 
+import { Header } from "@/components/header"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -44,21 +44,7 @@ export default function DesignSystemPage() {
 
   return (
     <div className="min-h-screen bg-[var(--color-bg)]">
-      {/* Header */}
-      <header className="sticky top-0 z-10 border-b border-[var(--color-border-weak)] bg-[var(--color-bg)] px-[var(--padding)]">
-        <div className="mx-auto flex h-14 max-w-[67.5rem] items-center justify-between">
-          <a href="/" className="flex items-center">
-            <Image
-              src="/opencode-wordmark.svg"
-              alt="opencode"
-              width={117}
-              height={21}
-              className="dark:invert"
-            />
-          </a>
-          <span className="text-sm text-[var(--color-text-weak)]">Design System</span>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero */}
       <section className="border-b border-[var(--color-border-weak)]">

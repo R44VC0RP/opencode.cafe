@@ -122,6 +122,43 @@ Use the spacing scale for consistent spacing:
 --vertical-padding: 3rem;
 ```
 
+### Page Structure
+
+All pages should follow this consistent structure:
+
+```tsx
+export default function ExamplePage() {
+  return (
+    <div className="min-h-screen bg-[var(--color-bg)]">
+      <Header />
+
+      {/* Hero/Title Section */}
+      <section className="border-b border-[var(--color-border-weak)] px-[var(--padding)] py-[var(--vertical-padding)]">
+        <div className="mx-auto max-w-[67.5rem]">
+          <h1 className="text-2xl font-semibold text-[var(--color-text-strong)]">
+            Page Title
+          </h1>
+          <p className="mt-1 text-[var(--color-text)]">Optional description</p>
+        </div>
+      </section>
+
+      {/* Main Content */}
+      <main className="px-[var(--padding)] py-[var(--vertical-padding)]">
+        <div className="mx-auto max-w-[67.5rem]">
+          {/* Page content here */}
+        </div>
+      </main>
+    </div>
+  )
+}
+```
+
+Key points:
+- **Hero section**: Use `<section>` with `border-b border-[var(--color-border-weak)]` and padding via CSS variables
+- **Main content**: Use `<main>` with same horizontal padding, content inside `mx-auto max-w-[67.5rem]`
+- **Consistent widths**: Always use `max-w-[67.5rem]` (1080px) for content containers
+- **Error/empty states**: Should follow the same structure with hero + main sections
+
 ### Transitions
 
 Use consistent transition timing:

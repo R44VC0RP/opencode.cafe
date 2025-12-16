@@ -1,16 +1,120 @@
 "use client"
 
-import { Authenticated, Unauthenticated, AuthLoading, useConvexAuth } from "convex/react"
+import { Authenticated, Unauthenticated, AuthLoading, useConvexAuth, useQuery } from "convex/react"
 import { UserButton, useUser } from "@clerk/nextjs"
 import Link from "next/link"
-import Image from "next/image"
+
+import { api } from "@/convex/_generated/api"
+import { Header } from "@/components/header"
+import { Badge } from "@/components/ui/badge"
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function DebugIdentity({ identity }: { identity: any }) {
+  if (!identity) return <span className="text-[var(--color-text-weak)]">No identity</span>
+  return (
+    <pre className="max-h-64 overflow-auto rounded bg-[var(--color-bg)] p-2 text-xs">
+      {JSON.stringify(identity, null, 2)}
+    </pre>
+  )
+}
+
+const EXTENSION_TYPES: Record<string, { label: string }> = {
+  "mcp-server": { label: "MCP Server" },
+  "slash-command": { label: "Slash Command" },
+  "hook": { label: "Hook" },
+  "theme": { label: "Theme" },
+  "web-view": { label: "Web View" },
+  "plugin": { label: "Plugin" },
+  "fork": { label: "Fork" },
+  "tool": { label: "Tool" },
+}
+
+function UserExtensions() {
+  const extensions = useQuery(api.extensions.listByAuthor)
+
+  if (extensions === undefined) {
+    return (
+      <div className="space-y-3">
+        {[1, 2].map((i) => (
+          <div
+            key={i}
+            className="h-20 animate-pulse rounded border border-[var(--color-border-weak)] bg-[var(--color-bg-weak)]"
+          />
+        ))}
+      </div>
+    )
+  }
+
+  if (extensions.length === 0) {
+    return (
+      <div className="rounded border border-[var(--color-border-weak)] bg-[var(--color-bg-weak)] p-6 text-center">
+        <p className="mb-4 text-[var(--color-text-weak)]">You haven&apos;t submitted any extensions yet.</p>
+        <Link
+          href="/submit"
+          className="inline-flex items-center justify-center rounded bg-[var(--color-bg-strong)] px-4 py-2 text-sm font-medium text-[var(--color-text-inverted)] transition-colors hover:bg-[var(--color-bg-strong-hover)]"
+        >
+          Submit Your First Extension
+        </Link>
+      </div>
+    )
+  }
+
+  return (
+    <div className="space-y-3">
+      {extensions.map((ext) => (
+        <div
+          key={ext._id}
+          className="flex items-center justify-between rounded border border-[var(--color-border-weak)] bg-[var(--color-bg-weak)] p-4"
+        >
+          <div className="flex flex-col gap-1">
+            <div className="flex items-center gap-2">
+              <Link
+                href={`/plugin/${ext.productId}`}
+                className="font-medium text-[var(--color-text-strong)] hover:underline"
+              >
+                {ext.displayName}
+              </Link>
+              <Badge
+                variant={
+                  ext.status === "approved"
+                    ? "success"
+                    : ext.status === "rejected"
+                    ? "destructive"
+                    : "warning"
+                }
+              >
+                {ext.status}
+              </Badge>
+            </div>
+            <span className="text-xs text-[var(--color-text-weak)]">
+              {EXTENSION_TYPES[ext.type]?.label || ext.type}
+            </span>
+            {ext.status === "rejected" && ext.rejectionReason && (
+              <p className="mt-2 text-sm text-[var(--color-danger)]">
+                Rejection reason: {ext.rejectionReason}
+              </p>
+            )}
+          </div>
+          <Link
+            href={`/submit/${ext.productId}/edit`}
+            className="text-sm text-[var(--color-text)] transition-colors hover:text-[var(--color-text-strong)]"
+          >
+            Edit
+          </Link>
+        </div>
+      ))}
+    </div>
+  )
+}
 
 function AccountContent() {
   const { user } = useUser()
   const { isAuthenticated } = useConvexAuth()
+  const debugIdentity = useQuery(api.admin.debugIdentity)
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-8">
+      {/* Profile Section */}
       <div className="flex items-center gap-4">
         <UserButton />
         <div>
@@ -23,30 +127,42 @@ function AccountContent() {
         </div>
       </div>
 
-      <div className="rounded border border-[var(--color-border-weak)] bg-[var(--color-bg-weak)] p-4">
-        <h3 className="mb-2 text-sm font-medium text-[var(--color-text-strong)]">
-          Authentication Status
+      {/* My Extensions */}
+      <div>
+        <h3 className="mb-4 text-lg font-semibold text-[var(--color-text-strong)]">
+          My Extensions
         </h3>
-        <div className="flex flex-col gap-2 text-sm">
-          <div className="flex items-center gap-2">
-            <span className="text-[var(--color-text-weak)]">Clerk:</span>
-            <span className="text-[var(--color-success)]">Authenticated</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-[var(--color-text-weak)]">Convex:</span>
-            <span className={isAuthenticated ? "text-[var(--color-success)]" : "text-[var(--color-warning)]"}>
-              {isAuthenticated ? "Authenticated" : "Syncing..."}
-            </span>
-          </div>
-        </div>
+        <UserExtensions />
       </div>
 
-      <div className="rounded border border-[var(--color-border-weak)] bg-[var(--color-bg-weak)] p-4">
-        <h3 className="mb-2 text-sm font-medium text-[var(--color-text-strong)]">
-          User ID
-        </h3>
-        <code className="text-xs text-[var(--color-text-weak)]">{user?.id}</code>
-      </div>
+      {/* Auth Status (collapsible/debug) */}
+      <details className="rounded border border-[var(--color-border-weak)] bg-[var(--color-bg-weak)]">
+        <summary className="cursor-pointer p-4 text-sm font-medium text-[var(--color-text-strong)]">
+          Debug Info
+        </summary>
+        <div className="border-t border-[var(--color-border-weak)] p-4">
+          <div className="flex flex-col gap-2 text-sm">
+            <div className="flex items-center gap-2">
+              <span className="text-[var(--color-text-weak)]">Clerk:</span>
+              <span className="text-[var(--color-success)]">Authenticated</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-[var(--color-text-weak)]">Convex:</span>
+              <span className={isAuthenticated ? "text-[var(--color-success)]" : "text-[var(--color-warning)]"}>
+                {isAuthenticated ? "Authenticated" : "Syncing..."}
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-[var(--color-text-weak)]">User ID:</span>
+              <code className="text-xs text-[var(--color-text)]">{user?.id}</code>
+            </div>
+            <div className="mt-4">
+              <span className="text-[var(--color-text-weak)]">Convex Identity (from JWT):</span>
+              <DebugIdentity identity={debugIdentity} />
+            </div>
+          </div>
+        </div>
+      </details>
     </div>
   )
 }
@@ -54,49 +170,42 @@ function AccountContent() {
 export default function AccountPage() {
   return (
     <div className="min-h-screen bg-[var(--color-bg)]">
-      {/* Header */}
-      <header className="sticky top-0 z-10 border-b border-[var(--color-border-weak)] bg-[var(--color-bg)] px-[var(--padding)]">
-        <div className="mx-auto flex h-14 max-w-[67.5rem] items-center justify-between">
-          <Link href="/" className="flex items-center">
-            <Image
-              src="/opencode-wordmark.svg"
-              alt="opencode"
-              width={117}
-              height={21}
-              className="dark:invert"
-            />
-          </Link>
-          <span className="text-sm text-[var(--color-text-weak)]">Account</span>
+      <Header />
+
+      {/* Hero */}
+      <section className="border-b border-[var(--color-border-weak)] px-[var(--padding)] py-[var(--vertical-padding)]">
+        <div className="mx-auto max-w-[67.5rem]">
+          <h1 className="text-2xl font-semibold text-[var(--color-text-strong)]">
+            Account
+          </h1>
         </div>
-      </header>
+      </section>
 
       {/* Content */}
-      <main className="mx-auto max-w-[67.5rem] px-[var(--padding)] py-[var(--vertical-padding)]">
-        <h1 className="mb-8 text-2xl font-semibold text-[var(--color-text-strong)]">
-          Account
-        </h1>
+      <main className="px-[var(--padding)] py-[var(--vertical-padding)]">
+        <div className="mx-auto max-w-[67.5rem]">
+          <AuthLoading>
+            <div className="text-[var(--color-text-weak)]">Loading...</div>
+          </AuthLoading>
 
-        <AuthLoading>
-          <div className="text-[var(--color-text-weak)]">Loading...</div>
-        </AuthLoading>
+          <Authenticated>
+            <AccountContent />
+          </Authenticated>
 
-        <Authenticated>
-          <AccountContent />
-        </Authenticated>
-
-        <Unauthenticated>
-          <div className="flex flex-col gap-4">
-            <p className="text-[var(--color-text)]">
-              You need to sign in to view your account.
-            </p>
-            <Link
-              href="/sign-in"
-              className="inline-flex w-fit items-center justify-center rounded bg-[var(--color-bg-strong)] px-4 py-2 text-sm font-medium text-[var(--color-text-inverted)] transition-colors hover:bg-[var(--color-bg-strong-hover)]"
-            >
-              Sign In
-            </Link>
-          </div>
-        </Unauthenticated>
+          <Unauthenticated>
+            <div className="flex flex-col gap-4">
+              <p className="text-[var(--color-text)]">
+                You need to sign in to view your account.
+              </p>
+              <Link
+                href="/sign-in"
+                className="inline-flex w-fit items-center justify-center rounded bg-[var(--color-bg-strong)] px-4 py-2 text-sm font-medium text-[var(--color-text-inverted)] transition-colors hover:bg-[var(--color-bg-strong-hover)]"
+              >
+                Sign In
+              </Link>
+            </div>
+          </Unauthenticated>
+        </div>
       </main>
     </div>
   )

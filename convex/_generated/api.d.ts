@@ -8,13 +8,19 @@
  * @module
  */
 
+import type * as admin from "../admin.js";
+import type * as extensions from "../extensions.js";
+
 import type {
   ApiFromModules,
   FilterApi,
   FunctionReference,
 } from "convex/server";
 
-declare const fullApi: ApiFromModules<{}>;
+declare const fullApi: ApiFromModules<{
+  admin: typeof admin;
+  extensions: typeof extensions;
+}>;
 
 /**
  * A utility for referencing Convex functions in your app's public API.

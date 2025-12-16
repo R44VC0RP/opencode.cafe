@@ -1,0 +1,21 @@
+{
+  "commit": {
+    "autoAccept": false,
+    "autoStageAll": false,
+    "model": "gpt-5-nano"
+  },
+  "changelog": {
+    "autoSave": false,
+    "outputFile": "CHANGELOG.md",
+    "model": "claude-sonnet-4-5"
+  },
+  "release": {
+    "autoTag": false,
+    "autoPush": false,
+    "tagPrefix": "v"
+  },
+  "general": {
+    "confirmPrompts": true,
+    "verbose": false
+  }
+}
