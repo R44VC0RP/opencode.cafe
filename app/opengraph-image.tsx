@@ -1,4 +1,6 @@
 import { ImageResponse } from "next/og"
+import { readFile } from "node:fs/promises"
+import { join } from "node:path"
 
 export const alt = "opencode.cafe - Extensions & plugins for OpenCode"
 export const size = {
@@ -8,6 +10,10 @@ export const size = {
 export const contentType = "image/png"
 
 export default async function Image() {
+  const fontData = await readFile(
+    join(process.cwd(), "assets/IBMPlexMono-SemiBold.ttf")
+  )
+
   return new ImageResponse(
     (
       <div
@@ -21,7 +27,7 @@ export default async function Image() {
           alignItems: "flex-start",
           justifyContent: "center",
           padding: "80px",
-          fontFamily: "monospace",
+          fontFamily: "IBM Plex Mono",
         }}
       >
         {/* Logo */}
@@ -96,6 +102,14 @@ export default async function Image() {
     ),
     {
       ...size,
+      fonts: [
+        {
+          name: "IBM Plex Mono",
+          data: fontData,
+          style: "normal",
+          weight: 600,
+        },
+      ],
     }
   )
 }
