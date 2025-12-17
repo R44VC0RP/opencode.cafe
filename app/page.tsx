@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import Link from "next/link"
 import { Authenticated, Unauthenticated, useQuery } from "convex/react"
 
@@ -159,27 +160,38 @@ export default function Home() {
       {/* Hero */}
       <section className="border-b border-[var(--color-border-weak)] px-[var(--padding)] py-[var(--vertical-padding)]">
         <div className="mx-auto max-w-[67.5rem]">
-          <div className="flex flex-col gap-6 py-16 md:py-24">
-            <h1 className="max-w-2xl text-4xl font-semibold leading-tight tracking-tight text-[var(--color-text-strong)] md:text-5xl">
-              Extensions & plugins for OpenCode
-            </h1>
-            <p className="max-w-xl text-lg leading-relaxed text-[var(--color-text)]">
-              Discover community-built extensions and plugins to enhance your OpenCode
-              experience. Share your own creations and collaborate with developers worldwide.
-            </p>
-            <div className="flex flex-col gap-4 pt-4 sm:flex-row">
-              <a
-                href="#extensions"
-                className="inline-flex items-center justify-center rounded bg-[var(--color-bg-strong)] px-6 py-3 text-sm font-medium text-[var(--color-text-inverted)] transition-colors hover:bg-[var(--color-bg-strong-hover)]"
-              >
-                Browse Extensions
-              </a>
-              <a
-                href="https://opencode.ai/docs"
-                className="inline-flex items-center justify-center rounded border border-[var(--color-border)] px-6 py-3 text-sm font-medium text-[var(--color-text-strong)] transition-colors hover:bg-[var(--color-bg-weak)]"
-              >
-                Read the Docs
-              </a>
+          <div className="grid items-center gap-12 py-8 md:grid-cols-2 md:py-12">
+            <div className="flex flex-col gap-6">
+              <h1 className="text-4xl font-semibold leading-tight tracking-tight text-[var(--color-text-strong)] md:text-5xl">
+                Extensions & plugins for OpenCode
+              </h1>
+              <p className="text-lg leading-relaxed text-[var(--color-text)]">
+                Discover community-built extensions and plugins to enhance your OpenCode
+                experience. Share your own creations and collaborate with developers worldwide.
+              </p>
+              <div className="flex flex-col gap-4 pt-4 sm:flex-row">
+                <a
+                  href="#extensions"
+                  className="inline-flex items-center justify-center rounded bg-[var(--color-bg-strong)] px-6 py-3 text-sm font-medium text-[var(--color-text-inverted)] transition-colors hover:bg-[var(--color-bg-strong-hover)]"
+                >
+                  Browse Extensions
+                </a>
+                <a
+                  href="https://opencode.ai/docs"
+                  className="inline-flex items-center justify-center rounded border border-[var(--color-border)] px-6 py-3 text-sm font-medium text-[var(--color-text-strong)] transition-colors hover:bg-[var(--color-bg-weak)]"
+                >
+                  Read the Docs
+                </a>
+              </div>
+            </div>
+            <div className="relative mx-auto aspect-square w-full">
+              <Image
+                src="/opencode_cafe_image.jpg"
+                alt="OpenCode Cafe"
+                fill
+                className="object-contain"
+                priority
+              />
             </div>
           </div>
         </div>
