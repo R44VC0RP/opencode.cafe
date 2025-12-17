@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { IBM_Plex_Mono } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
@@ -29,6 +30,12 @@ export default function RootLayout({
         <ClerkProvider appearance={{ baseTheme: dark }}>
           <ConvexClientProvider>{children}</ConvexClientProvider>
         </ClerkProvider>
+        <Script
+          strategy="afterInteractive"
+          data-website-id="dfid_EHv7ZA89i1nBxH89uqGvP"
+          data-domain="opencode.cafe"
+          src="/js/script.js"
+        />
       </body>
     </html>
   );
