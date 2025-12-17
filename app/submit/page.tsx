@@ -8,6 +8,7 @@ import ReactMarkdown from "react-markdown"
 import { useRouter } from "next/navigation"
 
 import { api } from "@/convex/_generated/api"
+import { EXTENSION_TYPE_LIST } from "@/lib/constants"
 import { Header } from "@/components/header"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -39,17 +40,6 @@ function useDebounce<T>(value: T, delay: number): T {
   return debouncedValue
 }
 
-const EXTENSION_TYPES = [
-  { value: "mcp-server", label: "MCP Server", description: "Model Context Protocol server for AI integrations" },
-  { value: "slash-command", label: "Slash Command", description: "Custom commands triggered with /" },
-  { value: "hook", label: "Hook", description: "Lifecycle hooks for automation" },
-  { value: "theme", label: "Theme", description: "Visual themes and color schemes" },
-  { value: "web-view", label: "Web View", description: "Custom web-based UI panels" },
-  { value: "plugin", label: "Plugin", description: "General purpose plugins" },
-  { value: "fork", label: "Fork", description: "Modified versions of OpenCode" },
-  { value: "tool", label: "Tool", description: "Standalone tools and utilities" },
-]
-
 interface FormData {
   type: string
   productId: string
@@ -62,7 +52,7 @@ interface FormData {
 }
 
 function SubmissionPreview({ data, authorName }: { data: FormData; authorName: string }) {
-  const typeInfo = EXTENSION_TYPES.find((t) => t.value === data.type)
+  const typeInfo = EXTENSION_TYPE_LIST.find((t) => t.value === data.type)
   const tags = data.tags.split(",").map((t) => t.trim()).filter(Boolean)
 
   return (
@@ -270,7 +260,7 @@ function SubmitForm() {
               <SelectValue placeholder="Select extension type..." />
             </SelectTrigger>
             <SelectContent>
-              {EXTENSION_TYPES.map((type) => (
+              {EXTENSION_TYPE_LIST.map((type) => (
                 <SelectItem key={type.value} value={type.value}>
                   <span>{type.label}</span>
                 </SelectItem>
@@ -279,7 +269,7 @@ function SubmitForm() {
           </Select>
           {formData.type && (
             <p className="text-xs text-[var(--color-text-weak)]">
-              {EXTENSION_TYPES.find((t) => t.value === formData.type)?.description}
+              {EXTENSION_TYPE_LIST.find((t) => t.value === formData.type)?.description}
             </p>
           )}
         </div>

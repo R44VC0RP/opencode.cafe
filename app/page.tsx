@@ -5,19 +5,10 @@ import Link from "next/link"
 import { Authenticated, Unauthenticated, useQuery } from "convex/react"
 
 import { api } from "@/convex/_generated/api"
+import { EXTENSION_TYPES, HOMEPAGE_CATEGORIES } from "@/lib/constants"
+import type { ExtensionType } from "@/lib/constants"
 import { Badge } from "@/components/ui/badge"
 import { Header } from "@/components/header"
-
-const EXTENSION_TYPES: Record<string, { label: string }> = {
-  "mcp-server": { label: "MCP Server" },
-  "slash-command": { label: "Slash Command" },
-  "hook": { label: "Hook" },
-  "theme": { label: "Theme" },
-  "web-view": { label: "Web View" },
-  "plugin": { label: "Plugin" },
-  "fork": { label: "Fork" },
-  "tool": { label: "Tool" },
-}
 
 function ExtensionCard({ extension }: { extension: {
   productId: string
@@ -27,7 +18,7 @@ function ExtensionCard({ extension }: { extension: {
   author: { name: string }
   tags: string[]
 } }) {
-  const typeInfo = EXTENSION_TYPES[extension.type]
+  const typeInfo = EXTENSION_TYPES[extension.type as ExtensionType]
 
   return (
     <Link
@@ -62,7 +53,7 @@ function ExtensionCard({ extension }: { extension: {
 }
 
 function ExtensionsGrid() {
-  const extensions = useQuery(api.extensions.listApproved)
+  const extensions = useQuery(api.extensions.listAllApproved)
 
   if (extensions === undefined) {
     return (
@@ -103,18 +94,12 @@ function ExtensionsGrid() {
 }
 
 function CategoryCounts() {
-  const extensions = useQuery(api.extensions.listApproved)
+  const extensions = useQuery(api.extensions.listAllApproved)
 
-  const counts: Record<string, number> = {
-    "mcp-server": 0,
-    "slash-command": 0,
-    "hook": 0,
-    "theme": 0,
-    "web-view": 0,
-    "plugin": 0,
-    "fork": 0,
-    "tool": 0,
-  }
+  const counts: Record<string, number> = {}
+  HOMEPAGE_CATEGORIES.forEach((type) => {
+    counts[type] = 0
+  })
 
   if (extensions) {
     extensions.forEach((ext) => {
@@ -124,30 +109,25 @@ function CategoryCounts() {
     })
   }
 
-  const categories = [
-    { type: "mcp-server", name: "MCP Servers" },
-    { type: "slash-command", name: "Slash Commands" },
-    { type: "hook", name: "Hooks" },
-    { type: "theme", name: "Themes" },
-    { type: "plugin", name: "Plugins" },
-    { type: "tool", name: "Tools" },
-  ]
-
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {categories.map((category) => (
-        <div
-          key={category.type}
-          className="group flex flex-col gap-2 rounded border border-[var(--color-border-weak)] bg-[var(--color-bg-weak)] p-5 transition-colors hover:border-[var(--color-border)] hover:bg-[var(--color-bg-weak-hover)]"
-        >
-          <span className="text-sm font-medium text-[var(--color-text-strong)]">
-            {category.name}
-          </span>
-          <span className="text-xs text-[var(--color-text-weak)]">
-            {counts[category.type]} {counts[category.type] === 1 ? "extension" : "extensions"}
-          </span>
-        </div>
-      ))}
+      {HOMEPAGE_CATEGORIES.map((type) => {
+        const typeInfo = EXTENSION_TYPES[type]
+        return (
+          <Link
+            key={type}
+            href={`/search?type=${type}`}
+            className="group flex flex-col gap-2 rounded border border-[var(--color-border-weak)] bg-[var(--color-bg-weak)] p-5 transition-colors hover:border-[var(--color-border)] hover:bg-[var(--color-bg-weak-hover)]"
+          >
+            <span className="text-sm font-medium text-[var(--color-text-strong)]">
+              {typeInfo.labelPlural}
+            </span>
+            <span className="text-xs text-[var(--color-text-weak)]">
+              {counts[type]} {counts[type] === 1 ? "extension" : "extensions"}
+            </span>
+          </Link>
+        )
+      })}
     </div>
   )
 }
@@ -256,11 +236,11 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="px-[var(--padding)] py-8">
-        <div className="mx-auto flex max-w-[67.5rem] flex-col items-center justify-between gap-4 md:flex-row">
+        <div className="mx-auto flex max-w-[67.5rem] flex-col items-center justify-between gap-6 md:flex-row">
           <span className="text-sm text-[var(--color-text-weak)]">
             opencode.cafe
           </span>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap justify-center gap-6">
             <a
               href="https://github.com/sst/opencode"
               className="text-sm text-[var(--color-text-weak)] transition-colors hover:text-[var(--color-text)]"
@@ -279,6 +259,24 @@ export default function Home() {
             >
               Discord
             </a>
+            <Link
+              href="/guidelines"
+              className="text-sm text-[var(--color-text-weak)] transition-colors hover:text-[var(--color-text)]"
+            >
+              Guidelines
+            </Link>
+            <Link
+              href="/terms"
+              className="text-sm text-[var(--color-text-weak)] transition-colors hover:text-[var(--color-text)]"
+            >
+              Terms
+            </Link>
+            <Link
+              href="/privacy"
+              className="text-sm text-[var(--color-text-weak)] transition-colors hover:text-[var(--color-text)]"
+            >
+              Privacy
+            </Link>
           </div>
         </div>
       </footer>

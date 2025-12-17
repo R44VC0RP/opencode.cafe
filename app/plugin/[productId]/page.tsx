@@ -6,20 +6,11 @@ import Link from "next/link"
 import ReactMarkdown from "react-markdown"
 
 import { api } from "@/convex/_generated/api"
+import { EXTENSION_TYPES } from "@/lib/constants"
+import type { ExtensionType } from "@/lib/constants"
 import { Header } from "@/components/header"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-
-const EXTENSION_TYPES: Record<string, { label: string; description: string }> = {
-  "mcp-server": { label: "MCP Server", description: "Model Context Protocol server for AI integrations" },
-  "slash-command": { label: "Slash Command", description: "Custom commands triggered with /" },
-  "hook": { label: "Hook", description: "Lifecycle hooks for automation" },
-  "theme": { label: "Theme", description: "Visual themes and color schemes" },
-  "web-view": { label: "Web View", description: "Custom web-based UI panels" },
-  "plugin": { label: "Plugin", description: "General purpose plugins" },
-  "fork": { label: "Fork", description: "Modified versions of OpenCode" },
-  "tool": { label: "Tool", description: "Standalone tools and utilities" },
-}
 
 function PluginContent({ productId }: { productId: string }) {
   const extension = useQuery(api.extensions.getByProductId, { productId })
@@ -48,7 +39,7 @@ function PluginContent({ productId }: { productId: string }) {
     )
   }
 
-  const typeInfo = EXTENSION_TYPES[extension.type]
+  const typeInfo = EXTENSION_TYPES[extension.type as ExtensionType]
   const formattedDate = new Date(extension.createdAt).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",

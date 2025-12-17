@@ -5,6 +5,8 @@ import { UserButton, useUser } from "@clerk/nextjs"
 import Link from "next/link"
 
 import { api } from "@/convex/_generated/api"
+import { EXTENSION_TYPES } from "@/lib/constants"
+import type { ExtensionType } from "@/lib/constants"
 import { Header } from "@/components/header"
 import { Badge } from "@/components/ui/badge"
 
@@ -16,17 +18,6 @@ function DebugIdentity({ identity }: { identity: any }) {
       {JSON.stringify(identity, null, 2)}
     </pre>
   )
-}
-
-const EXTENSION_TYPES: Record<string, { label: string }> = {
-  "mcp-server": { label: "MCP Server" },
-  "slash-command": { label: "Slash Command" },
-  "hook": { label: "Hook" },
-  "theme": { label: "Theme" },
-  "web-view": { label: "Web View" },
-  "plugin": { label: "Plugin" },
-  "fork": { label: "Fork" },
-  "tool": { label: "Tool" },
 }
 
 function UserExtensions() {
@@ -87,7 +78,7 @@ function UserExtensions() {
               </Badge>
             </div>
             <span className="text-xs text-[var(--color-text-weak)]">
-              {EXTENSION_TYPES[ext.type]?.label || ext.type}
+              {EXTENSION_TYPES[ext.type as ExtensionType]?.label || ext.type}
             </span>
             {ext.status === "rejected" && ext.rejectionReason && (
               <p className="mt-2 text-sm text-[var(--color-danger)]">
@@ -135,34 +126,36 @@ function AccountContent() {
         <UserExtensions />
       </div>
 
-      {/* Auth Status (collapsible/debug) */}
-      <details className="rounded border border-[var(--color-border-weak)] bg-[var(--color-bg-weak)]">
-        <summary className="cursor-pointer p-4 text-sm font-medium text-[var(--color-text-strong)]">
-          Debug Info
-        </summary>
-        <div className="border-t border-[var(--color-border-weak)] p-4">
-          <div className="flex flex-col gap-2 text-sm">
-            <div className="flex items-center gap-2">
-              <span className="text-[var(--color-text-weak)]">Clerk:</span>
-              <span className="text-[var(--color-success)]">Authenticated</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-[var(--color-text-weak)]">Convex:</span>
-              <span className={isAuthenticated ? "text-[var(--color-success)]" : "text-[var(--color-warning)]"}>
-                {isAuthenticated ? "Authenticated" : "Syncing..."}
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-[var(--color-text-weak)]">User ID:</span>
-              <code className="text-xs text-[var(--color-text)]">{user?.id}</code>
-            </div>
-            <div className="mt-4">
-              <span className="text-[var(--color-text-weak)]">Convex Identity (from JWT):</span>
-              <DebugIdentity identity={debugIdentity} />
+      {/* Auth Status (collapsible/debug) - Only shown in development */}
+      {process.env.NODE_ENV === "development" && (
+        <details className="rounded border border-[var(--color-border-weak)] bg-[var(--color-bg-weak)]">
+          <summary className="cursor-pointer p-4 text-sm font-medium text-[var(--color-text-strong)]">
+            Debug Info
+          </summary>
+          <div className="border-t border-[var(--color-border-weak)] p-4">
+            <div className="flex flex-col gap-2 text-sm">
+              <div className="flex items-center gap-2">
+                <span className="text-[var(--color-text-weak)]">Clerk:</span>
+                <span className="text-[var(--color-success)]">Authenticated</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-[var(--color-text-weak)]">Convex:</span>
+                <span className={isAuthenticated ? "text-[var(--color-success)]" : "text-[var(--color-warning)]"}>
+                  {isAuthenticated ? "Authenticated" : "Syncing..."}
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-[var(--color-text-weak)]">User ID:</span>
+                <code className="text-xs text-[var(--color-text)]">{user?.id}</code>
+              </div>
+              <div className="mt-4">
+                <span className="text-[var(--color-text-weak)]">Convex Identity (from JWT):</span>
+                <DebugIdentity identity={debugIdentity} />
+              </div>
             </div>
           </div>
-        </div>
-      </details>
+        </details>
+      )}
     </div>
   )
 }

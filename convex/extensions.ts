@@ -1,6 +1,10 @@
 import { v } from "convex/values"
 import { mutation, query } from "./_generated/server"
 
+// Rate limit configuration
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000 // 1 hour
+const MAX_SUBMISSIONS_PER_WINDOW = 5
+
 export const submit = mutation({
   args: {
     productId: v.string(),
@@ -28,6 +32,29 @@ export const submit = mutation({
       throw new Error("Not authenticated")
     }
 
+    // Rate limiting check
+    const now = Date.now()
+    const windowStart = now - RATE_LIMIT_WINDOW_MS
+    
+    const recentSubmissions = await ctx.db
+      .query("rateLimits")
+      .withIndex("by_user_action", (q) => 
+        q.eq("userId", identity.subject).eq("action", "submit")
+      )
+      .filter((q) => q.gte(q.field("timestamp"), windowStart))
+      .collect()
+
+    if (recentSubmissions.length >= MAX_SUBMISSIONS_PER_WINDOW) {
+      throw new Error("Rate limit exceeded. You can submit up to 5 extensions per hour. Please try again later.")
+    }
+
+    // Record this submission attempt for rate limiting
+    await ctx.db.insert("rateLimits", {
+      userId: identity.subject,
+      action: "submit",
+      timestamp: now,
+    })
+
     // Validate productId format (lowercase letters and hyphens only)
     if (!/^[a-z][a-z-]*[a-z]$|^[a-z]$/.test(args.productId)) {
       throw new Error("Product ID must contain only lowercase letters and hyphens, and start/end with a letter")
@@ -44,7 +71,6 @@ export const submit = mutation({
     }
 
     // Create the extension
-    const now = Date.now()
     const extensionId = await ctx.db.insert("extensions", {
       productId: args.productId,
       type: args.type,
@@ -79,6 +105,30 @@ export const getByProductId = query({
 })
 
 export const listApproved = query({
+  args: {
+    limit: v.optional(v.number()),
+    cursor: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    const limit = args.limit ?? 50
+
+    const query = ctx.db
+      .query("extensions")
+      .withIndex("by_status", (q) => q.eq("status", "approved"))
+      .order("desc")
+
+    const results = await query.paginate({ numItems: limit, cursor: args.cursor ?? null })
+    
+    return {
+      extensions: results.page,
+      nextCursor: results.continueCursor,
+      isDone: results.isDone,
+    }
+  },
+})
+
+// Keep a simple version for backwards compatibility and homepage
+export const listAllApproved = query({
   args: {},
   handler: async (ctx) => {
     return await ctx.db
