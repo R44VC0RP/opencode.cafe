@@ -22,6 +22,7 @@ export function Header() {
             alt="opencode.cafe"
             width={150}
             height={17}
+            className="dark:invert-0 invert"
           />
         </Link>
 
