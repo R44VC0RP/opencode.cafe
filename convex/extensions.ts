@@ -1,5 +1,6 @@
 import { v } from "convex/values"
 import { mutation, query } from "./_generated/server"
+import { api } from "./_generated/api"
 
 // Rate limit configuration
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000 // 1 hour
@@ -71,6 +72,9 @@ export const submit = mutation({
     }
 
     // Create the extension
+    const authorName = identity.name || "Anonymous"
+    const authorEmail = identity.email || ""
+    
     const extensionId = await ctx.db.insert("extensions", {
       productId: args.productId,
       type: args.type,
@@ -82,12 +86,22 @@ export const submit = mutation({
       installation: args.installation,
       author: {
         userId: identity.subject,
-        name: identity.name || "Anonymous",
-        email: identity.email || "",
+        name: authorName,
+        email: authorEmail,
       },
       status: "pending",
       createdAt: now,
       updatedAt: now,
+    })
+
+    // Send notification email to admin (fire-and-forget)
+    await ctx.scheduler.runAfter(0, api.email.sendNewSubmissionEmail, {
+      authorName,
+      authorEmail,
+      extensionName: args.displayName,
+      productId: args.productId,
+      extensionType: args.type,
+      description: args.description,
     })
 
     return extensionId
