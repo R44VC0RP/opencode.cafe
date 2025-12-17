@@ -212,3 +212,99 @@ export const deleteComment = mutation({
     return { success: true }
   },
 })
+
+// Valid extension types
+const VALID_TYPES = ["mcp-server", "slash-command", "hook", "theme", "web-view", "plugin", "fork", "tool"] as const
+type ExtensionType = typeof VALID_TYPES[number]
+
+// Bulk import extensions (admin only)
+// Extensions go to "pending" status, admin is set as the author
+export const bulkImport = mutation({
+  args: {
+    extensions: v.array(
+      v.object({
+        productId: v.string(),
+        type: v.string(),
+        displayName: v.string(),
+        description: v.string(),
+        repoUrl: v.string(),
+        homepageUrl: v.optional(v.string()),
+        tags: v.array(v.string()),
+        installation: v.string(),
+      })
+    ),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity()
+    const admin = await checkIsAdmin(ctx)
+    if (!admin || !identity) {
+      throw new Error("Unauthorized: Admin access required")
+    }
+
+    const results: { productId: string; success: boolean; error?: string }[] = []
+    const now = Date.now()
+
+    for (const ext of args.extensions) {
+      try {
+        // Validate product ID format
+        const cleanProductId = ext.productId.toLowerCase().replace(/[^a-z-]/g, "")
+        if (cleanProductId.length < 2) {
+          results.push({ productId: ext.productId, success: false, error: "Product ID must be at least 2 characters" })
+          continue
+        }
+
+        // Check if product ID already exists
+        const existing = await ctx.db
+          .query("extensions")
+          .withIndex("by_productId", (q) => q.eq("productId", cleanProductId))
+          .first()
+
+        if (existing) {
+          results.push({ productId: cleanProductId, success: false, error: "Product ID already exists" })
+          continue
+        }
+
+        // Validate type
+        if (!VALID_TYPES.includes(ext.type as ExtensionType)) {
+          results.push({ productId: cleanProductId, success: false, error: `Invalid type: ${ext.type}` })
+          continue
+        }
+
+        // Create extension with admin as author, status = pending
+        await ctx.db.insert("extensions", {
+          productId: cleanProductId,
+          type: ext.type as ExtensionType,
+          displayName: ext.displayName,
+          description: ext.description,
+          repoUrl: ext.repoUrl,
+          homepageUrl: ext.homepageUrl || undefined,
+          tags: ext.tags,
+          installation: ext.installation,
+          author: {
+            userId: identity.subject,
+            name: identity.name || identity.email || "Admin",
+            email: identity.email || "",
+          },
+          status: "pending",
+          createdAt: now,
+          updatedAt: now,
+        })
+
+        results.push({ productId: cleanProductId, success: true })
+      } catch (err) {
+        results.push({
+          productId: ext.productId,
+          success: false,
+          error: err instanceof Error ? err.message : "Unknown error",
+        })
+      }
+    }
+
+    return {
+      total: args.extensions.length,
+      succeeded: results.filter((r) => r.success).length,
+      failed: results.filter((r) => !r.success).length,
+      results,
+    }
+  },
+})

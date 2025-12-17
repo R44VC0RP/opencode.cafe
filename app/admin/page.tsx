@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useQuery } from "convex/react"
-import { Clock, CheckCircle, XCircle, Package } from "lucide-react"
+import { Clock, CheckCircle, XCircle, Package, Upload } from "lucide-react"
 
 import { api } from "@/convex/_generated/api"
 import { Header } from "@/components/header"
@@ -115,7 +115,7 @@ export default function AdminDashboard() {
         {/* Quick Actions */}
         <div className="mt-8">
           <h2 className="mb-4 text-lg font-semibold text-[var(--color-text-strong)]">Quick Actions</h2>
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardHeader>
                 <CardTitle>Review Queue</CardTitle>
@@ -142,6 +142,21 @@ export default function AdminDashboard() {
               <CardContent>
                 <Link href="/admin/extensions">
                   <Button variant="outline">View All Extensions</Button>
+                </Link>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Bulk Import</CardTitle>
+                <CardDescription>Import multiple extensions from JSON</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Link href="/admin/import">
+                  <Button variant="outline">
+                    <Upload className="mr-2 size-4" />
+                    Import Extensions
+                  </Button>
                 </Link>
               </CardContent>
             </Card>

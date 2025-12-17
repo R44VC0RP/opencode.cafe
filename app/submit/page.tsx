@@ -3,9 +3,10 @@
 import { Authenticated, Unauthenticated, AuthLoading, useMutation, useQuery } from "convex/react"
 import { useUser } from "@clerk/nextjs"
 import Link from "next/link"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import ReactMarkdown from "react-markdown"
 import { useRouter } from "next/navigation"
+import { Upload, FileJson, FormInput } from "lucide-react"
 
 import { api } from "@/convex/_generated/api"
 import { EXTENSION_TYPE_LIST } from "@/lib/constants"
@@ -22,6 +23,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+
+const VALID_TYPES = ["mcp-server", "slash-command", "hook", "theme", "web-view", "plugin", "fork", "tool"] as const
 
 // Custom hook for debouncing a value
 function useDebounce<T>(value: T, delay: number): T {
@@ -171,11 +174,28 @@ function SubmissionPreview({ data, authorName }: { data: FormData; authorName: s
   )
 }
 
+type InputMode = "manual" | "json"
+
+interface JsonExtension {
+  productId?: string
+  type?: string
+  displayName?: string
+  description?: string
+  repoUrl?: string
+  homepageUrl?: string
+  tags?: string[] | string
+  installation?: string
+}
+
 function SubmitForm() {
   const { user } = useUser()
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [inputMode, setInputMode] = useState<InputMode>("manual")
+  const [jsonInput, setJsonInput] = useState("")
+  const [jsonError, setJsonError] = useState<string | null>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
   const [formData, setFormData] = useState<FormData>({
     type: "",
     productId: "",
@@ -202,6 +222,78 @@ function SubmitForm() {
   const updateField = (field: keyof FormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
     setError(null)
+  }
+
+  const parseAndApplyJson = (jsonString: string) => {
+    setJsonError(null)
+    
+    if (!jsonString.trim()) {
+      setJsonError("Please enter JSON data")
+      return false
+    }
+
+    try {
+      const parsed = JSON.parse(jsonString) as JsonExtension
+      
+      // Validate type if provided
+      if (parsed.type && !VALID_TYPES.includes(parsed.type as typeof VALID_TYPES[number])) {
+        setJsonError(`Invalid type "${parsed.type}". Valid types: ${VALID_TYPES.join(", ")}`)
+        return false
+      }
+
+      // Convert tags array to comma-separated string if needed
+      let tagsString = ""
+      if (Array.isArray(parsed.tags)) {
+        tagsString = parsed.tags.join(", ")
+      } else if (typeof parsed.tags === "string") {
+        tagsString = parsed.tags
+      }
+
+      // Apply parsed data to form
+      setFormData({
+        type: parsed.type || "",
+        productId: parsed.productId?.toLowerCase().replace(/[^a-z-]/g, "") || "",
+        displayName: parsed.displayName || "",
+        description: parsed.description || "",
+        repoUrl: parsed.repoUrl || "",
+        homepageUrl: parsed.homepageUrl || "",
+        tags: tagsString,
+        installation: parsed.installation || "",
+      })
+
+      // Switch to manual mode to show the populated form
+      setInputMode("manual")
+      return true
+    } catch {
+      setJsonError("Invalid JSON format. Please check your syntax.")
+      return false
+    }
+  }
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    if (!file.name.endsWith(".json")) {
+      setJsonError("Please upload a .json file")
+      return
+    }
+
+    const reader = new FileReader()
+    reader.onload = (event) => {
+      const content = event.target?.result as string
+      setJsonInput(content)
+      parseAndApplyJson(content)
+    }
+    reader.onerror = () => {
+      setJsonError("Failed to read file")
+    }
+    reader.readAsText(file)
+    
+    // Reset file input
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ""
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -241,10 +333,40 @@ function SubmitForm() {
   return (
     <div className="grid gap-12 lg:grid-cols-2">
       {/* Form Column */}
-      <form onSubmit={handleSubmit} className="flex flex-col gap-8">
-        <h2 className="text-lg font-semibold text-[var(--color-text-strong)]">
-          Extension Details
-        </h2>
+      <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-4">
+          <h2 className="text-lg font-semibold text-[var(--color-text-strong)]">
+            Extension Details
+          </h2>
+          
+          {/* Input Mode Toggle */}
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={() => setInputMode("manual")}
+              className={`flex items-center gap-2 rounded px-3 py-2 text-sm font-medium transition-colors ${
+                inputMode === "manual"
+                  ? "bg-[var(--color-bg-strong)] text-[var(--color-text-inverted)]"
+                  : "bg-[var(--color-bg-weak)] text-[var(--color-text)] hover:bg-[var(--color-bg-weak-hover)]"
+              }`}
+            >
+              <FormInput className="h-4 w-4" />
+              Manual Entry
+            </button>
+            <button
+              type="button"
+              onClick={() => setInputMode("json")}
+              className={`flex items-center gap-2 rounded px-3 py-2 text-sm font-medium transition-colors ${
+                inputMode === "json"
+                  ? "bg-[var(--color-bg-strong)] text-[var(--color-text-inverted)]"
+                  : "bg-[var(--color-bg-weak)] text-[var(--color-text)] hover:bg-[var(--color-bg-weak-hover)]"
+              }`}
+            >
+              <FileJson className="h-4 w-4" />
+              Import from JSON
+            </button>
+          </div>
+        </div>
 
         {error && (
           <div className="rounded border border-[var(--color-danger)] bg-[var(--color-danger)]/10 p-4 text-sm text-[var(--color-danger)]">
@@ -252,6 +374,74 @@ function SubmitForm() {
           </div>
         )}
 
+        {/* JSON Import Mode */}
+        {inputMode === "json" && (
+          <div className="flex flex-col gap-6">
+            <div className="rounded border border-[var(--color-border-weak)] bg-[var(--color-bg-weak)] p-4">
+              <p className="text-sm text-[var(--color-text)]">
+                Paste JSON or upload a .json file to pre-fill the form. The JSON should match this format:
+              </p>
+              <pre className="mt-3 overflow-x-auto rounded bg-[var(--color-bg)] p-3 text-xs text-[var(--color-text-weak)]">
+{`{
+  "productId": "my-extension",
+  "type": "plugin",
+  "displayName": "My Extension",
+  "description": "Description here",
+  "repoUrl": "https://github.com/...",
+  "homepageUrl": "https://...",
+  "tags": ["tag1", "tag2"],
+  "installation": "## Installation\\n..."
+}`}
+              </pre>
+            </div>
+
+            {jsonError && (
+              <div className="rounded border border-[var(--color-danger)] bg-[var(--color-danger)]/10 p-4 text-sm text-[var(--color-danger)]">
+                {jsonError}
+              </div>
+            )}
+
+            <div className="flex flex-col gap-3">
+              <Label htmlFor="jsonInput">JSON Data</Label>
+              <Textarea
+                id="jsonInput"
+                placeholder='{"productId": "my-extension", ...}'
+                rows={12}
+                value={jsonInput}
+                onChange={(e) => {
+                  setJsonInput(e.target.value)
+                  setJsonError(null)
+                }}
+                className="font-mono text-sm"
+              />
+            </div>
+
+            <div className="flex items-center gap-4">
+              <Button
+                type="button"
+                onClick={() => parseAndApplyJson(jsonInput)}
+              >
+                Apply JSON
+              </Button>
+              <span className="text-sm text-[var(--color-text-weak)]">or</span>
+              <label className="flex cursor-pointer items-center gap-2 rounded border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2 text-sm font-medium text-[var(--color-text)] transition-colors hover:bg-[var(--color-bg-weak)]">
+                <Upload className="h-4 w-4" />
+                Upload .json file
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept=".json"
+                  onChange={handleFileUpload}
+                  className="hidden"
+                />
+              </label>
+            </div>
+          </div>
+        )}
+
+        {/* Manual Entry Form */}
+        {inputMode === "manual" && (
+        <form onSubmit={handleSubmit} className="flex flex-col gap-8">
         {/* Extension Type */}
         <div className="flex flex-col gap-3">
           <Label htmlFor="type">Type *</Label>
@@ -438,7 +628,9 @@ Supports **Markdown** formatting!`}
             Cancel
           </Link>
         </div>
-      </form>
+        </form>
+        )}
+      </div>
 
       {/* Preview Column */}
       <div className="flex flex-col gap-4">
