@@ -1,5 +1,6 @@
 import { v } from "convex/values"
 import { mutation, query, QueryCtx, MutationCtx } from "./_generated/server"
+import { api } from "./_generated/api"
 
 // Helper to check if user is admin based on Clerk metadata
 async function checkIsAdmin(ctx: QueryCtx | MutationCtx): Promise<boolean> {
@@ -115,6 +116,14 @@ export const approve = mutation({
       reviewedBy: identity.email || identity.subject,
     })
 
+    // Send approval email (fire-and-forget)
+    await ctx.scheduler.runAfter(0, api.email.sendApprovalEmail, {
+      to: extension.author.email,
+      authorName: extension.author.name,
+      extensionName: extension.displayName,
+      productId: extension.productId,
+    })
+
     return { success: true }
   },
 })
@@ -142,6 +151,15 @@ export const reject = mutation({
       rejectionReason: args.reason,
       reviewedAt: Date.now(),
       reviewedBy: identity.email || identity.subject,
+    })
+
+    // Send rejection email (fire-and-forget)
+    await ctx.scheduler.runAfter(0, api.email.sendRejectionEmail, {
+      to: extension.author.email,
+      authorName: extension.author.name,
+      extensionName: extension.displayName,
+      productId: extension.productId,
+      rejectionReason: args.reason,
     })
 
     return { success: true }

@@ -106,8 +106,9 @@ export default function AdminPendingPage() {
     <div className="min-h-screen bg-[var(--color-bg)]">
       <Header />
 
-      <div className="mx-auto max-w-[67.5rem] px-[var(--padding)] py-[var(--vertical-padding)]">
-        <div className="mb-8">
+      {/* Hero */}
+      <section className="border-b border-[var(--color-border-weak)] px-[var(--padding)] py-[var(--vertical-padding)]">
+        <div className="mx-auto max-w-[67.5rem]">
           <Link
             href="/admin"
             className="mb-4 inline-flex items-center gap-1 text-sm text-[var(--color-text-weak)] hover:text-[var(--color-text)]"
@@ -116,14 +117,18 @@ export default function AdminPendingPage() {
             Back to Dashboard
           </Link>
           <h1 className="text-2xl font-semibold text-[var(--color-text-strong)]">Pending Review</h1>
-          <p className="mt-1 text-sm text-[var(--color-text-weak)]">
+          <p className="mt-1 text-[var(--color-text)]">
             {pendingExtensions.length === 0
               ? "No extensions pending review"
               : `${pendingExtensions.length} extension${pendingExtensions.length === 1 ? "" : "s"} awaiting review`}
           </p>
         </div>
+      </section>
 
-        {pendingExtensions.length === 0 ? (
+      {/* Content */}
+      <main className="px-[var(--padding)] py-[var(--vertical-padding)]">
+        <div className="mx-auto max-w-[67.5rem]">
+          {pendingExtensions.length === 0 ? (
           <Card>
             <CardContent className="flex flex-col items-center justify-center py-12">
               <CheckCircle className="mb-4 size-12 text-[var(--color-success)]" />
@@ -198,7 +203,7 @@ export default function AdminPendingPage() {
                     </div>
                   </div>
                 </CardContent>
-                <CardFooter className="flex justify-end gap-2 border-t border-[var(--color-border-weak)] bg-[var(--color-bg-weak)] pt-4">
+                <CardFooter className="flex justify-end gap-2 border-t border-[var(--color-border-weak)] pt-4">
                   <Button
                     variant="outline"
                     onClick={() => {
@@ -219,7 +224,8 @@ export default function AdminPendingPage() {
             ))}
           </div>
         )}
-      </div>
+        </div>
+      </main>
 
       {/* Rejection Dialog */}
       <Dialog open={rejectingId !== null} onOpenChange={() => setRejectingId(null)}>

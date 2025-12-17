@@ -123,8 +123,9 @@ export default function AdminExtensionsPage() {
     <div className="min-h-screen bg-[var(--color-bg)]">
       <Header />
 
-      <div className="mx-auto max-w-[67.5rem] px-[var(--padding)] py-[var(--vertical-padding)]">
-        <div className="mb-8">
+      {/* Hero */}
+      <section className="border-b border-[var(--color-border-weak)] px-[var(--padding)] py-[var(--vertical-padding)]">
+        <div className="mx-auto max-w-[67.5rem]">
           <Link
             href="/admin"
             className="mb-4 inline-flex items-center gap-1 text-sm text-[var(--color-text-weak)] hover:text-[var(--color-text)]"
@@ -135,7 +136,7 @@ export default function AdminExtensionsPage() {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-semibold text-[var(--color-text-strong)]">All Extensions</h1>
-              <p className="mt-1 text-sm text-[var(--color-text-weak)]">
+              <p className="mt-1 text-[var(--color-text)]">
                 {extensions.length} extension{extensions.length === 1 ? "" : "s"}
                 {statusFilter !== "all" && ` (filtered by ${statusFilter})`}
               </p>
@@ -159,8 +160,12 @@ export default function AdminExtensionsPage() {
             </div>
           </div>
         </div>
+      </section>
 
-        {extensions.length === 0 ? (
+      {/* Content */}
+      <main className="px-[var(--padding)] py-[var(--vertical-padding)]">
+        <div className="mx-auto max-w-[67.5rem]">
+          {extensions.length === 0 ? (
           <Card>
             <CardContent className="flex flex-col items-center justify-center py-12">
               <p className="text-sm text-[var(--color-text-weak)]">No extensions found.</p>
@@ -232,7 +237,8 @@ export default function AdminExtensionsPage() {
             ))}
           </div>
         )}
-      </div>
+        </div>
+      </main>
 
       {/* Delete Confirmation Dialog */}
       <Dialog open={deletingId !== null} onOpenChange={() => setDeletingId(null)}>

@@ -54,15 +54,18 @@ export default function AdminDashboard() {
     <div className="min-h-screen bg-[var(--color-bg)]">
       <Header />
 
-      <div className="mx-auto max-w-[67.5rem] px-[var(--padding)] py-[var(--vertical-padding)]">
-        <div className="mb-8 flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-semibold text-[var(--color-text-strong)]">Admin Dashboard</h1>
-            <p className="mt-1 text-sm text-[var(--color-text-weak)]">Manage extension submissions and approvals</p>
-          </div>
+      {/* Hero */}
+      <section className="border-b border-[var(--color-border-weak)] px-[var(--padding)] py-[var(--vertical-padding)]">
+        <div className="mx-auto max-w-[67.5rem]">
+          <h1 className="text-2xl font-semibold text-[var(--color-text-strong)]">Admin Dashboard</h1>
+          <p className="mt-1 text-[var(--color-text)]">Manage extension submissions and approvals</p>
         </div>
+      </section>
 
-        {/* Stats Cards */}
+      {/* Content */}
+      <main className="px-[var(--padding)] py-[var(--vertical-padding)]">
+        <div className="mx-auto max-w-[67.5rem]">
+          {/* Stats Cards */}
         <div className="grid gap-4 md:grid-cols-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
@@ -144,7 +147,8 @@ export default function AdminDashboard() {
             </Card>
           </div>
         </div>
-      </div>
+        </div>
+      </main>
     </div>
   )
 }
