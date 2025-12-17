@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og"
 import { readFile } from "node:fs/promises"
 import { join } from "node:path"
 
-export const alt = "opencode.cafe - Extensions & plugins for OpenCode"
+export const alt = "opencode.cafe - Community extensions for OpenCode"
 export const size = {
   width: 1200,
   height: 630,
@@ -11,7 +11,7 @@ export const contentType = "image/png"
 
 export default async function Image() {
   const fontData = await readFile(
-    join(process.cwd(), "assets/IBMPlexMono-SemiBold.ttf")
+    join(process.cwd(), "assets/Inter-SemiBold.ttf")
   )
 
   const logoData = await readFile(
@@ -24,7 +24,7 @@ export default async function Image() {
       <div
         style={{
           fontSize: 32,
-          background: "#131111",
+          background: "#1a1412",
           width: "100%",
           height: "100%",
           display: "flex",
@@ -32,14 +32,15 @@ export default async function Image() {
           alignItems: "flex-start",
           justifyContent: "center",
           padding: "80px",
-          fontFamily: "IBM Plex Mono",
+          fontFamily: "Inter",
         }}
       >
         {/* Logo - opencode.cafe */}
         <div
           style={{
             display: "flex",
-            alignItems: "center",
+            flexDirection: "column",
+            alignItems: "flex-start",
             marginBottom: "40px",
           }}
         >
@@ -51,6 +52,15 @@ export default async function Image() {
             alt="opencode.cafe"
             style={{ objectFit: "contain" }}
           />
+          <div
+            style={{
+              fontSize: "14px",
+              color: "#6b5d55",
+              marginTop: "8px",
+            }}
+          >
+            not affiliated with OpenCode
+          </div>
         </div>
 
         {/* Title */}
@@ -58,26 +68,26 @@ export default async function Image() {
           style={{
             fontSize: "64px",
             fontWeight: 600,
-            color: "#F1ECEC",
+            color: "#f5f0eb",
             lineHeight: 1.2,
             marginBottom: "24px",
           }}
         >
-          Extensions & plugins
+          Community Extensions
         </div>
 
         {/* Subtitle */}
         <div
           style={{
-            fontSize: "32px",
-            color: "#B7B1B1",
+            fontSize: "28px",
+            color: "#a89080",
             lineHeight: 1.5,
           }}
         >
-          Discover community-built extensions and plugins to enhance your OpenCode experience.
+          A cozy corner for OpenCode extensions, plugins, and tools built by the community.
         </div>
 
-        {/* Accent bar */}
+        {/* Accent bar - warm coffee color */}
         <div
           style={{
             position: "absolute",
@@ -85,7 +95,7 @@ export default async function Image() {
             left: 0,
             right: 0,
             height: "8px",
-            background: "#E8F5A2",
+            background: "#c4a67a",
           }}
         />
       </div>
@@ -94,7 +104,7 @@ export default async function Image() {
       ...size,
       fonts: [
         {
-          name: "IBM Plex Mono",
+          name: "Inter",
           data: fontData,
           style: "normal",
           weight: 600,
