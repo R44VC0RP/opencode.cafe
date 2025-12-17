@@ -32,7 +32,7 @@ export default function RootLayout({
         </ClerkProvider>
         <Script
           strategy="afterInteractive"
-          data-website-id="dfid_EHv7ZA89i1nBxH89uqGvP"
+          data-website-id="dfid_vUdAIIWNAoRCj3VHYIZ7g"
           data-domain="opencode.cafe"
           src="/js/script.js"
         />
