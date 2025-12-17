@@ -63,12 +63,15 @@ export function ExtensionApproved({
 
           <Section style={footer}>
             <Text style={footerText}>
-              Thanks for contributing to the OpenCode community.
+              Thanks for contributing to the community.
             </Text>
             <Text style={footerText}>
               <Link href="https://opencode.cafe" style={link}>
                 opencode.cafe
               </Link>
+            </Text>
+            <Text style={disclaimerText}>
+              This is a community project and is not affiliated with OpenCode or SST.
             </Text>
           </Section>
         </Container>
@@ -79,11 +82,11 @@ export function ExtensionApproved({
 
 export default ExtensionApproved
 
-// Styles - minimal, monospace-inspired
+// Styles
 const main = {
   backgroundColor: "#131111",
   fontFamily:
-    "'IBM Plex Mono', 'Menlo', 'Monaco', 'Courier New', monospace",
+    "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
 }
 
 const container = {
@@ -148,4 +151,11 @@ const footerText = {
   fontSize: "12px",
   lineHeight: "20px",
   margin: "0 0 8px",
+}
+
+const disclaimerText = {
+  color: "#4A4646",
+  fontSize: "10px",
+  lineHeight: "16px",
+  margin: "16px 0 0",
 }

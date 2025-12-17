@@ -91,6 +91,9 @@ export function NewSubmission({
                 opencode.cafe
               </Link>
             </Text>
+            <Text style={disclaimerText}>
+              This is a community project and is not affiliated with OpenCode or SST.
+            </Text>
           </Section>
         </Container>
       </Body>
@@ -104,7 +107,7 @@ export default NewSubmission
 const main = {
   backgroundColor: "#131111",
   fontFamily:
-    "'IBM Plex Mono', 'Menlo', 'Monaco', 'Courier New', monospace",
+    "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
 }
 
 const container = {
@@ -211,4 +214,11 @@ const footerText = {
   fontSize: "12px",
   lineHeight: "20px",
   margin: "0",
+}
+
+const disclaimerText = {
+  color: "#4A4646",
+  fontSize: "10px",
+  lineHeight: "16px",
+  margin: "16px 0 0",
 }

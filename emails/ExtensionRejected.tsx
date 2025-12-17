@@ -73,7 +73,7 @@ export function ExtensionRejected({
           <Section style={footer}>
             <Text style={footerText}>
               Questions? Visit our{" "}
-              <Link href="https://github.com/sst/opencode" style={link}>
+              <Link href="https://github.com/R44VC0RP/opencode.cafe" style={link}>
                 GitHub
               </Link>{" "}
               for support.
@@ -82,6 +82,9 @@ export function ExtensionRejected({
               <Link href="https://opencode.cafe" style={link}>
                 opencode.cafe
               </Link>
+            </Text>
+            <Text style={disclaimerText}>
+              This is a community project and is not affiliated with OpenCode or SST.
             </Text>
           </Section>
         </Container>
@@ -92,11 +95,11 @@ export function ExtensionRejected({
 
 export default ExtensionRejected
 
-// Styles - minimal, monospace-inspired
+// Styles
 const main = {
   backgroundColor: "#131111",
   fontFamily:
-    "'IBM Plex Mono', 'Menlo', 'Monaco', 'Courier New', monospace",
+    "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
 }
 
 const container = {
@@ -177,4 +180,11 @@ const footerText = {
   fontSize: "12px",
   lineHeight: "20px",
   margin: "0 0 8px",
+}
+
+const disclaimerText = {
+  color: "#4A4646",
+  fontSize: "10px",
+  lineHeight: "16px",
+  margin: "16px 0 0",
 }
