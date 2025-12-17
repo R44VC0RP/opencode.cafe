@@ -187,3 +187,28 @@ export const deleteExtension = mutation({
     return { success: true }
   },
 })
+
+// Delete a comment (admin only) - soft delete to preserve thread structure
+export const deleteComment = mutation({
+  args: {
+    commentId: v.id("comments"),
+  },
+  handler: async (ctx, args) => {
+    const admin = await checkIsAdmin(ctx)
+    if (!admin) {
+      throw new Error("Unauthorized: Admin access required")
+    }
+
+    const comment = await ctx.db.get(args.commentId)
+    if (!comment) {
+      throw new Error("Comment not found")
+    }
+
+    // Soft delete to preserve thread structure
+    await ctx.db.patch(args.commentId, {
+      isDeleted: true,
+    })
+
+    return { success: true }
+  },
+})

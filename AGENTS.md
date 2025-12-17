@@ -27,7 +27,7 @@ This project uses the OpenCode design system - a monospace-first, minimal design
 
 ### Design Principles
 
-1. **Monospace Typography** - The entire UI uses monospace fonts (IBM Plex Mono) for a developer/terminal aesthetic
+1. **Monospace Typography** - The entire UI uses monospace fonts (JetBrains Mono) for a developer/terminal aesthetic
 2. **Warm Neutral Palette** - Warm grays with low saturation (HSL hue 0-30)
 3. **Yellow-Green Accent** - `hsl(62, 84%, 88%)` for interactive highlights, focus states, and text selection
 4. **Minimal Border Radius** - Sharp, precise edges (3-8px radius)

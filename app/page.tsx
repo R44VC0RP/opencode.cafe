@@ -156,12 +156,12 @@ export default function Home() {
                 >
                   Browse Extensions
                 </a>
-                <a
-                  href="https://opencode.ai/docs"
+                <Link
+                  href="/submit"
                   className="inline-flex items-center justify-center rounded border border-[var(--color-border)] px-6 py-3 text-sm font-medium text-[var(--color-text-strong)] transition-colors hover:bg-[var(--color-bg-weak)]"
                 >
-                  Read the Docs
-                </a>
+                  Submit Extension
+                </Link>
               </div>
             </div>
             <div className="relative mx-auto aspect-square w-full">
@@ -236,47 +236,62 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="px-[var(--padding)] py-8">
-        <div className="mx-auto flex max-w-[67.5rem] flex-col items-center justify-between gap-6 md:flex-row">
-          <span className="text-sm text-[var(--color-text-weak)]">
-            opencode.cafe
-          </span>
-          <div className="flex flex-wrap justify-center gap-6">
-            <a
-              href="https://github.com/sst/opencode"
-              className="text-sm text-[var(--color-text-weak)] transition-colors hover:text-[var(--color-text)]"
-            >
-              GitHub
-            </a>
-            <a
-              href="https://opencode.ai/docs"
-              className="text-sm text-[var(--color-text-weak)] transition-colors hover:text-[var(--color-text)]"
-            >
-              Docs
-            </a>
-            <a
-              href="https://discord.gg/opencode"
-              className="text-sm text-[var(--color-text-weak)] transition-colors hover:text-[var(--color-text)]"
-            >
-              Discord
-            </a>
-            <Link
-              href="/guidelines"
-              className="text-sm text-[var(--color-text-weak)] transition-colors hover:text-[var(--color-text)]"
-            >
-              Guidelines
-            </Link>
-            <Link
-              href="/terms"
-              className="text-sm text-[var(--color-text-weak)] transition-colors hover:text-[var(--color-text)]"
-            >
-              Terms
-            </Link>
-            <Link
-              href="/privacy"
-              className="text-sm text-[var(--color-text-weak)] transition-colors hover:text-[var(--color-text)]"
-            >
-              Privacy
-            </Link>
+        <div className="mx-auto flex max-w-[67.5rem] flex-col items-center gap-6">
+          <div className="flex w-full flex-col items-center justify-between gap-6 md:flex-row">
+            <span className="text-sm text-[var(--color-text-weak)]">
+              opencode.cafe
+            </span>
+            <div className="flex flex-wrap justify-center gap-6">
+              <a
+                href="https://github.com/R44VC0RP/opencode.cafe"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-[var(--color-text-weak)] transition-colors hover:text-[var(--color-text)]"
+              >
+                GitHub
+              </a>
+              <Link
+                href="/guidelines"
+                className="text-sm text-[var(--color-text-weak)] transition-colors hover:text-[var(--color-text)]"
+              >
+                Guidelines
+              </Link>
+              <Link
+                href="/terms"
+                className="text-sm text-[var(--color-text-weak)] transition-colors hover:text-[var(--color-text)]"
+              >
+                Terms
+              </Link>
+              <Link
+                href="/privacy"
+                className="text-sm text-[var(--color-text-weak)] transition-colors hover:text-[var(--color-text)]"
+              >
+                Privacy
+              </Link>
+            </div>
+          </div>
+          <div className="border-t border-[var(--color-border-weak)] pt-6 text-center">
+            <p className="text-xs text-[var(--color-text-weaker)]">
+              This is a community project and is not affiliated with, endorsed by, or sponsored by{" "}
+              <a
+                href="https://opencode.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 hover:text-[var(--color-text-weak)]"
+              >
+                OpenCode
+              </a>{" "}
+              or{" "}
+              <a
+                href="https://sst.dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 hover:text-[var(--color-text-weak)]"
+              >
+                SST
+              </a>
+              .
+            </p>
           </div>
         </div>
       </footer>

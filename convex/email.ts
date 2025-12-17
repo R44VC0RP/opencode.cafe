@@ -7,6 +7,7 @@ import { render } from "@react-email/components"
 import { ExtensionApproved } from "../emails/ExtensionApproved"
 import { ExtensionRejected } from "../emails/ExtensionRejected"
 import { NewSubmission } from "../emails/NewSubmission"
+import { NewComment } from "../emails/NewComment"
 
 const FROM_EMAIL = "OpenCode Cafe <hello@opencode.cafe>"
 const ADMIN_EMAIL = "ryan@mandarin3d.com"
@@ -136,6 +137,51 @@ export const sendNewSubmissionEmail = action({
       return { success: true, emailId: response.id }
     } catch (err) {
       console.error("Error sending new submission email:", err)
+      return { success: false, error: String(err) }
+    }
+  },
+})
+
+export const sendNewCommentEmail = action({
+  args: {
+    to: v.string(),
+    authorName: v.string(),
+    extensionName: v.string(),
+    productId: v.string(),
+    commenterName: v.string(),
+    commentPreview: v.string(),
+  },
+  handler: async (_ctx, args) => {
+    const apiKey = process.env.INBOUND_API_KEY
+    if (!apiKey) {
+      console.error("INBOUND_API_KEY not set")
+      return { success: false, error: "Email service not configured" }
+    }
+
+    const inbound = new Inbound({ apiKey })
+
+    try {
+      const html = await render(
+        NewComment({
+          authorName: args.authorName,
+          extensionName: args.extensionName,
+          productId: args.productId,
+          commenterName: args.commenterName,
+          commentPreview: args.commentPreview,
+        })
+      )
+
+      const response = await inbound.emails.send({
+        from: FROM_EMAIL,
+        to: args.to,
+        subject: `New comment on "${args.extensionName}"`,
+        html,
+      })
+
+      console.log("New comment email sent:", response.id)
+      return { success: true, emailId: response.id }
+    } catch (err) {
+      console.error("Error sending new comment email:", err)
       return { success: false, error: String(err) }
     }
   },

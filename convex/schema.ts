@@ -61,4 +61,35 @@ export default defineSchema({
     .index("by_type", ["type"])
     .index("by_status", ["status"])
     .index("by_author", ["author.userId"]),
+
+  // Comments on extensions
+  comments: defineTable({
+    // Reference to the extension
+    extensionId: v.id("extensions"),
+    // Optional parent comment for replies (null = top-level)
+    parentId: v.optional(v.id("comments")),
+    // Comment content (markdown)
+    content: v.string(),
+    // Author information
+    author: v.object({
+      userId: v.string(),
+      name: v.string(),
+    }),
+    // Soft delete support
+    isDeleted: v.optional(v.boolean()),
+    // Timestamp
+    createdAt: v.number(),
+  })
+    .index("by_extension", ["extensionId"])
+    .index("by_parent", ["parentId"])
+    .index("by_author", ["author.userId"]),
+
+  // Comment likes (separate table for efficient counting/toggling)
+  commentLikes: defineTable({
+    commentId: v.id("comments"),
+    userId: v.string(),
+    createdAt: v.number(),
+  })
+    .index("by_comment", ["commentId"])
+    .index("by_user_comment", ["userId", "commentId"]),
 })

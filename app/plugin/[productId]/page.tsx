@@ -11,6 +11,7 @@ import type { ExtensionType } from "@/lib/constants"
 import { Header } from "@/components/header"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { CommentSection } from "@/components/comments/comment-section"
 
 function PluginContent({ productId }: { productId: string }) {
   const extension = useQuery(api.extensions.getByProductId, { productId })
@@ -180,6 +181,14 @@ function PluginContent({ productId }: { productId: string }) {
             <span className="text-sm text-[var(--color-text-strong)]">{formattedDate}</span>
           </div>
         </div>
+      </div>
+
+      {/* Discussion */}
+      <div className="flex flex-col gap-4 border-t border-[var(--color-border-weak)] pt-8">
+        <h2 className="text-xl font-semibold text-[var(--color-text-strong)]">
+          Discussion
+        </h2>
+        <CommentSection extensionId={extension._id} />
       </div>
     </div>
   )
