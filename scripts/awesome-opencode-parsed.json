@@ -1,0 +1,330 @@
+[
+  {
+    "name": "Opencode-Google-AI-Search-Plugin",
+    "url": "https://github.com/IgorWarzocha/Opencode-Google-AI-Search-Plugin",
+    "description": "An opencode plugin that exposes a native tool for querying Google AI Mode (SGE).",
+    "category": "plugins",
+    "repoOwner": "IgorWarzocha",
+    "repoName": "Opencode-Google-AI-Search-Plugin"
+  },
+  {
+    "name": "Opencode-Context-Analysis-Plugin",
+    "url": "https://github.com/IgorWarzocha/Opencode-Context-Analysis-Plugin",
+    "description": "An opencode plugin that provides detailed token usage analysis for your AI sessions.",
+    "category": "plugins",
+    "repoOwner": "IgorWarzocha",
+    "repoName": "Opencode-Context-Analysis-Plugin"
+  },
+  {
+    "name": "opencode-ignore",
+    "url": "https://github.com/lgladysz/opencode-ignore",
+    "description": "Plugin to ignore directory / file based on pattern.",
+    "category": "plugins",
+    "repoOwner": "lgladysz",
+    "repoName": "opencode-ignore"
+  },
+  {
+    "name": "opencode-warcraft-notifications",
+    "url": "https://github.com/pantheon-org/opencode-warcraft-notifications",
+    "description": "Notification plugin with Warcraft sounds for opencode completion alerts.",
+    "category": "plugins",
+    "repoOwner": "pantheon-org",
+    "repoName": "opencode-warcraft-notifications"
+  },
+  {
+    "name": "with-context-mcp",
+    "url": "https://github.com/boxpositron/with-context-mcp",
+    "description": "MCP server for managing project-specific markdown notes with templates, batch edits, and ignore patterns.",
+    "category": "plugins",
+    "repoOwner": "boxpositron",
+    "repoName": "with-context-mcp"
+  },
+  {
+    "name": "opencode-skills",
+    "url": "https://github.com/malhashemi/opencode-skills",
+    "description": "Plugin for managing and organizing opencode skills and capabilities.",
+    "category": "plugins",
+    "repoOwner": "malhashemi",
+    "repoName": "opencode-skills"
+  },
+  {
+    "name": "openskills",
+    "url": "https://github.com/numman-ali/openskills",
+    "description": "Alternative skills management plugin for opencode with enhanced features.",
+    "category": "plugins",
+    "repoOwner": "numman-ali",
+    "repoName": "openskills"
+  },
+  {
+    "name": "opencode-smart-title",
+    "url": "https://github.com/Tarquinen/opencode-smart-title",
+    "description": "Auto-generates meaningful session titles using AI.",
+    "category": "plugins",
+    "repoOwner": "Tarquinen",
+    "repoName": "opencode-smart-title"
+  },
+  {
+    "name": "opencode-background",
+    "url": "https://github.com/zenobi-us/opencode-background",
+    "description": "Background process management plugin for opencode.",
+    "category": "plugins",
+    "repoOwner": "zenobi-us",
+    "repoName": "opencode-background"
+  },
+  {
+    "name": "opencode-dynamic-context-pruning",
+    "url": "https://github.com/Tarquinen/opencode-dynamic-context-pruning",
+    "description": "Plugin that optimizes token usage by pruning obsolete tool outputs from conversation context.",
+    "category": "plugins",
+    "repoOwner": "Tarquinen",
+    "repoName": "opencode-dynamic-context-pruning"
+  },
+  {
+    "name": "opencode-tokenscope",
+    "url": "https://github.com/ramtinJ95/opencode-tokenscope",
+    "description": "Tokenscope, Comprehensive token usage analysis and cost tracking for opencode sessions.",
+    "category": "plugins",
+    "repoOwner": "ramtinJ95",
+    "repoName": "opencode-tokenscope"
+  },
+  {
+    "name": "opencode-openai-codex-auth",
+    "url": "https://github.com/numman-ali/opencode-openai-codex-auth",
+    "description": "This plugin enables opencode to use OpenAI's Codex backend via ChatGPT Plus/Pro OAuth authentication, allowing you to use your ChatGPT subscription instead of OpenAI Platform API credits.",
+    "category": "plugins",
+    "repoOwner": "numman-ali",
+    "repoName": "opencode-openai-codex-auth"
+  },
+  {
+    "name": "OpenHax codex",
+    "url": "https://github.com/open-hax/codex",
+    "description": "OAuth authentication plugin for personal coding assistance with ChatGPT Plus/Pro subscriptions - uses OpenAI's official authentication method",
+    "category": "plugins",
+    "repoOwner": "open-hax",
+    "repoName": "codex"
+  },
+  {
+    "name": "opencode-sessions",
+    "url": "https://github.com/malhashemi/opencode-sessions",
+    "description": "Session management plugin for OpenCode with multi-agent collaboration support",
+    "category": "plugins",
+    "repoOwner": "malhashemi",
+    "repoName": "opencode-sessions"
+  },
+  {
+    "name": "Opencode-Roadmap",
+    "url": "https://github.com/IgorWarzocha/Opencode-Roadmap",
+    "description": "Strategic roadmap planning and multi-agent coordination plugin. Provides project-wide planning capabilities with immutable history and auto-archiving.",
+    "category": "plugins",
+    "repoOwner": "IgorWarzocha",
+    "repoName": "Opencode-Roadmap"
+  },
+  {
+    "name": "opencode-gemini-auth",
+    "url": "https://github.com/jenslys/opencode-gemini-auth",
+    "description": "Authenticate the Opencode CLI with your Google account so you can use your existing Gemini plan and its included quota instead of API billing",
+    "category": "plugins",
+    "repoOwner": "jenslys",
+    "repoName": "opencode-gemini-auth"
+  },
+  {
+    "name": "opencode-direnv",
+    "url": "https://github.com/simonwjackson/opencode-direnv",
+    "description": "Automatically loads direnv environment variables at session start. Perfect for Nix flakes and project-specific environments.",
+    "category": "plugins",
+    "repoOwner": "simonwjackson",
+    "repoName": "opencode-direnv"
+  },
+  {
+    "name": "oh-my-opencode",
+    "url": "https://github.com/code-yeongyu/oh-my-opencode",
+    "description": "Background agents, pre-built tools (LSP/AST/MCP), curated agents, and Claude Code compatible layer.",
+    "category": "plugins",
+    "repoOwner": "code-yeongyu",
+    "repoName": "oh-my-opencode"
+  },
+  {
+    "name": "opencode-ai-poimandres-theme",
+    "url": "https://github.com/ajaxdude/opencode-ai-poimandres-theme",
+    "description": "Poimandres theme for opencode.",
+    "category": "themes",
+    "repoOwner": "ajaxdude",
+    "repoName": "opencode-ai-poimandres-theme"
+  },
+  {
+    "name": "Agentic",
+    "url": "https://github.com/Cluster444/agentic",
+    "description": "Modular AI agents and commands for structured software development with opencode.",
+    "category": "agents",
+    "repoOwner": "Cluster444",
+    "repoName": "agentic"
+  },
+  {
+    "name": "awesome-claude-code-subagents",
+    "url": "https://github.com/VoltAgent/awesome-claude-code-subagents",
+    "description": "Comprehensive reference repository for production-ready Claude Code subagents.",
+    "category": "agents",
+    "repoOwner": "VoltAgent",
+    "repoName": "awesome-claude-code-subagents"
+  },
+  {
+    "name": "opencode-agents",
+    "url": "https://github.com/darrenhinde/opencode-agents",
+    "description": "A set of opencode configurations, prompts, agents, and plugins for enhanced development workflows.",
+    "category": "agents",
+    "repoOwner": "darrenhinde",
+    "repoName": "opencode-agents"
+  },
+  {
+    "name": "ocmonitor-share",
+    "url": "https://github.com/Shlomob/ocmonitor-share",
+    "description": "A CLI tool for monitoring and analysing opencode AI coding usage.",
+    "category": "projects",
+    "repoOwner": "Shlomob",
+    "repoName": "ocmonitor-share"
+  },
+  {
+    "name": "occtx",
+    "url": "https://github.com/hungthai1401/occtx",
+    "description": "A command-line tool for switching between different opencode contexts quickly.",
+    "category": "projects",
+    "repoOwner": "hungthai1401",
+    "repoName": "occtx"
+  },
+  {
+    "name": "mcp-voice-interface",
+    "url": "https://github.com/shantur/mcp-voice-interface",
+    "description": "Talk to AI assistants using your voice through a web browser. Compatible with Claude Desktop, opencode, and other MCP-enabled AI tools.",
+    "category": "projects",
+    "repoOwner": "shantur",
+    "repoName": "mcp-voice-interface"
+  },
+  {
+    "name": "Codex-Proxy-Server",
+    "url": "https://github.com/unluckyjori/Codex-Proxy-Server",
+    "description": "A proxy server that provides a local API proxy for Codex/ChatGPT-like models.",
+    "category": "projects",
+    "repoOwner": "unluckyjori",
+    "repoName": "Codex-Proxy-Server"
+  },
+  {
+    "name": "qwen-code-oai-proxy",
+    "url": "https://github.com/aptdnfapt/qwen-code-oai-proxy",
+    "description": "An OpenAI-Compatible Proxy Server for Qwen models.",
+    "category": "projects",
+    "repoOwner": "aptdnfapt",
+    "repoName": "qwen-code-oai-proxy"
+  },
+  {
+    "name": "geminicli2api",
+    "url": "https://github.com/gzzhongqi/geminicli2api",
+    "description": "A proxy that converts the Gemini CLI tool into OpenAI-compatible endpoints.",
+    "category": "projects",
+    "repoOwner": "gzzhongqi",
+    "repoName": "geminicli2api"
+  },
+  {
+    "name": "CLIProxyAPI",
+    "url": "https://github.com/router-for-me/CLIProxyAPI",
+    "description": "A proxy server providing compatible API interfaces for multiple model CLIs.",
+    "category": "projects",
+    "repoOwner": "router-for-me",
+    "repoName": "CLIProxyAPI"
+  },
+  {
+    "name": "opencode.nvim",
+    "url": "https://github.com/NickvanDyke/opencode.nvim",
+    "description": "Neovim plugin for making convenient editor-aware prompts.",
+    "category": "projects",
+    "repoOwner": "NickvanDyke",
+    "repoName": "opencode.nvim"
+  },
+  {
+    "name": "kimaki",
+    "url": "https://github.com/remorses/kimaki/",
+    "description": "A Discord bot to control opencode sessions on any computer via Discord.",
+    "category": "projects",
+    "repoOwner": "remorses",
+    "repoName": "kimaki"
+  },
+  {
+    "name": "Vibe Kanban",
+    "url": "https://github.com/BloopAI/vibe-kanban",
+    "description": "A Kanban board to manage and orchestrate AI coding agents in parallel.[[1](https://www.google.com/url?sa=E&q=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fgrounding-api-redirect%2FAUZIYQHIHL7uayaJJgxDiGXeuGn5lO7Mu37isBe1A6HfFTG9RSQU7M4TCSC2uasqpncR57EkYh4E6Nwch-BbwcvOa1mv4cBwdzCvBqb3C4e4QWjTFaDm5680PwqIeOX4JOHllfU%3D)]",
+    "category": "projects",
+    "repoOwner": "BloopAI",
+    "repoName": "vibe-kanban"
+  },
+  {
+    "name": "opencode-skills",
+    "url": "https://github.com/malhashemi/opencode-skills",
+    "description": "Skills management system for organizing and tracking opencode capabilities.",
+    "category": "projects",
+    "repoOwner": "malhashemi",
+    "repoName": "opencode-skills"
+  },
+  {
+    "name": "opencode-sessions",
+    "url": "https://github.com/malhashemi/opencode-sessions",
+    "description": "Session management tool for opencode to track and organize coding sessions.",
+    "category": "projects",
+    "repoOwner": "malhashemi",
+    "repoName": "opencode-sessions"
+  },
+  {
+    "name": "Handy",
+    "url": "https://github.com/cjpais/Handy",
+    "description": "Easy Open Source Speech to Text",
+    "category": "projects",
+    "repoOwner": "cjpais",
+    "repoName": "Handy"
+  },
+  {
+    "name": "opencode-web",
+    "url": "https://github.com/kcrommett/opencode-web",
+    "description": "Web interface for opencode - browser-based access to AI coding agent.",
+    "category": "projects",
+    "repoOwner": "kcrommett",
+    "repoName": "opencode-web"
+  },
+  {
+    "name": "openspec",
+    "url": "https://github.com/Fission-AI/OpenSpec",
+    "description": "Spec-driven development with opencode - structured specification management.",
+    "category": "projects",
+    "repoOwner": "Fission-AI",
+    "repoName": "OpenSpec"
+  },
+  {
+    "name": "oc-manager",
+    "url": "https://github.com/kcrommett/oc-manager",
+    "description": "Terminal UI for inspecting, filtering, and pruning OpenCode metadata stored on disk. The app is written in TypeScript, runs on Bun, and renders with @opentui/react.",
+    "category": "projects",
+    "repoOwner": "kcrommett",
+    "repoName": "oc-manager"
+  },
+  {
+    "name": "beads",
+    "url": "https://github.com/steveyegge/beads",
+    "description": "Steve Yegge's project/task management system for agents (with beads_viewer UI)",
+    "category": "projects",
+    "repoOwner": "steveyegge",
+    "repoName": "beads"
+  },
+  {
+    "name": "opencode-ddev",
+    "url": "https://github.com/JUVOJustin/opencode-ddev",
+    "description": "Wraps bash commands to execute inside the DDEV container (Docker-based PHP development environments.).",
+    "category": "projects",
+    "repoOwner": "JUVOJustin",
+    "repoName": "opencode-ddev"
+  },
+  {
+    "name": "GoTTY",
+    "url": "https://github.com/sorenisanerd/gotty",
+    "description": "A simple command-line tool that turns your CLI tools, like opencode, into web applications.",
+    "category": "resources",
+    "repoOwner": "sorenisanerd",
+    "repoName": "gotty"
+  }
+]
