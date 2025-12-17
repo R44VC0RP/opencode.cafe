@@ -6,42 +6,42 @@
 /* ============================================================================
    opencode.cafe Design System
    
-   A clean, minimal design system for the community extensions marketplace.
-   Uses warm neutral grays with a soft accent for interactive elements.
+   A warm, cozy design system inspired by coffee shop aesthetics.
+   Uses warm browns, creams, and earthy tones.
    ============================================================================ */
 
 :root {
   /* ==========================================================================
-     Core Color Tokens - Light Mode
+     Core Color Tokens - Light Mode (Cream/Latte)
      ========================================================================== */
   
   /* Backgrounds */
-  --color-bg: hsl(0, 20%, 99%);
-  --color-bg-weak: hsl(0, 8%, 97%);
-  --color-bg-weak-hover: hsl(0, 8%, 94%);
-  --color-bg-strong: hsl(0, 5%, 12%);
-  --color-bg-strong-hover: hsl(0, 5%, 18%);
-  --color-bg-interactive: hsl(210, 80%, 85%);
-  --color-bg-interactive-weak: hsl(210, 70%, 95%);
+  --color-bg: hsl(35, 30%, 97%);
+  --color-bg-weak: hsl(30, 25%, 93%);
+  --color-bg-weak-hover: hsl(30, 20%, 89%);
+  --color-bg-strong: hsl(25, 30%, 20%);
+  --color-bg-strong-hover: hsl(25, 30%, 28%);
+  --color-bg-interactive: hsl(30, 60%, 80%);
+  --color-bg-interactive-weak: hsl(35, 40%, 92%);
 
   /* Text */
-  --color-text: hsl(0, 1%, 39%);
-  --color-text-weak: hsl(0, 1%, 60%);
-  --color-text-weaker: hsl(30, 2%, 81%);
-  --color-text-strong: hsl(0, 5%, 12%);
-  --color-text-inverted: hsl(0, 20%, 99%);
+  --color-text: hsl(25, 15%, 40%);
+  --color-text-weak: hsl(25, 10%, 55%);
+  --color-text-weaker: hsl(30, 10%, 75%);
+  --color-text-strong: hsl(25, 35%, 18%);
+  --color-text-inverted: hsl(35, 30%, 97%);
 
   /* Borders */
-  --color-border: hsl(30, 2%, 81%);
-  --color-border-weak: hsl(0, 1%, 85%);
+  --color-border: hsl(30, 15%, 80%);
+  --color-border-weak: hsl(30, 12%, 87%);
 
   /* Icons */
-  --color-icon: hsl(0, 1%, 55%);
+  --color-icon: hsl(25, 10%, 50%);
 
   /* Semantic Colors */
-  --color-success: hsl(142, 71%, 45%);
-  --color-warning: hsl(38, 92%, 50%);
-  --color-danger: hsl(0, 84%, 60%);
+  --color-success: hsl(145, 50%, 42%);
+  --color-warning: hsl(35, 85%, 50%);
+  --color-danger: hsl(0, 65%, 55%);
 
   /* ==========================================================================
      Spacing Scale (4px base unit)
@@ -125,65 +125,65 @@
 }
 
 /* ==========================================================================
-   Dark Mode
+   Dark Mode (Espresso/Dark Roast)
    ========================================================================== */
 @media (prefers-color-scheme: dark) {
   :root {
     /* Backgrounds */
-    --color-bg: hsl(0, 9%, 7%);
-    --color-bg-weak: hsl(0, 6%, 10%);
-    --color-bg-weak-hover: hsl(0, 6%, 15%);
-    --color-bg-strong: hsl(0, 15%, 94%);
-    --color-bg-strong-hover: hsl(0, 15%, 97%);
-    --color-bg-interactive: hsl(210, 90%, 80%);
-    --color-bg-interactive-weak: hsl(210, 30%, 15%);
+    --color-bg: hsl(25, 20%, 8%);
+    --color-bg-weak: hsl(25, 15%, 12%);
+    --color-bg-weak-hover: hsl(25, 12%, 18%);
+    --color-bg-strong: hsl(35, 25%, 90%);
+    --color-bg-strong-hover: hsl(35, 25%, 95%);
+    --color-bg-interactive: hsl(30, 50%, 55%);
+    --color-bg-interactive-weak: hsl(25, 20%, 15%);
 
     /* Text */
-    --color-text: hsl(0, 4%, 71%);
-    --color-text-weak: hsl(0, 2%, 49%);
-    --color-text-weaker: hsl(0, 3%, 28%);
-    --color-text-strong: hsl(0, 15%, 94%);
-    --color-text-inverted: hsl(0, 9%, 7%);
+    --color-text: hsl(30, 15%, 70%);
+    --color-text-weak: hsl(25, 10%, 50%);
+    --color-text-weaker: hsl(25, 8%, 30%);
+    --color-text-strong: hsl(35, 30%, 92%);
+    --color-text-inverted: hsl(25, 20%, 8%);
 
     /* Borders */
-    --color-border: hsl(0, 3%, 28%);
-    --color-border-weak: hsl(0, 4%, 23%);
+    --color-border: hsl(25, 10%, 25%);
+    --color-border-weak: hsl(25, 8%, 20%);
 
     /* Icons */
-    --color-icon: hsl(10, 3%, 43%);
+    --color-icon: hsl(25, 10%, 45%);
 
     /* Semantic */
-    --color-danger: hsl(0, 72%, 63%);
+    --color-danger: hsl(0, 60%, 60%);
   }
 }
 
 /* Dark class override (for manual toggle) */
 .dark {
   /* Backgrounds */
-  --color-bg: hsl(0, 9%, 7%);
-  --color-bg-weak: hsl(0, 6%, 10%);
-  --color-bg-weak-hover: hsl(0, 6%, 15%);
-  --color-bg-strong: hsl(0, 15%, 94%);
-  --color-bg-strong-hover: hsl(0, 15%, 97%);
-  --color-bg-interactive: hsl(210, 90%, 80%);
-  --color-bg-interactive-weak: hsl(210, 30%, 15%);
+  --color-bg: hsl(25, 20%, 8%);
+  --color-bg-weak: hsl(25, 15%, 12%);
+  --color-bg-weak-hover: hsl(25, 12%, 18%);
+  --color-bg-strong: hsl(35, 25%, 90%);
+  --color-bg-strong-hover: hsl(35, 25%, 95%);
+  --color-bg-interactive: hsl(30, 50%, 55%);
+  --color-bg-interactive-weak: hsl(25, 20%, 15%);
 
   /* Text */
-  --color-text: hsl(0, 4%, 71%);
-  --color-text-weak: hsl(0, 2%, 49%);
-  --color-text-weaker: hsl(0, 3%, 28%);
-  --color-text-strong: hsl(0, 15%, 94%);
-  --color-text-inverted: hsl(0, 9%, 7%);
+  --color-text: hsl(30, 15%, 70%);
+  --color-text-weak: hsl(25, 10%, 50%);
+  --color-text-weaker: hsl(25, 8%, 30%);
+  --color-text-strong: hsl(35, 30%, 92%);
+  --color-text-inverted: hsl(25, 20%, 8%);
 
   /* Borders */
-  --color-border: hsl(0, 3%, 28%);
-  --color-border-weak: hsl(0, 4%, 23%);
+  --color-border: hsl(25, 10%, 25%);
+  --color-border-weak: hsl(25, 8%, 20%);
 
   /* Icons */
-  --color-icon: hsl(10, 3%, 43%);
+  --color-icon: hsl(25, 10%, 45%);
 
   /* Semantic */
-  --color-danger: hsl(0, 72%, 63%);
+  --color-danger: hsl(0, 60%, 60%);
 }
 
 /* ==========================================================================

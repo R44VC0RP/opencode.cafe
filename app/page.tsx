@@ -23,7 +23,7 @@ function ExtensionCard({ extension }: { extension: {
   return (
     <Link
       href={`/plugin/${extension.productId}`}
-      className="group flex flex-col gap-4 rounded border border-[var(--color-border-weak)] bg-[var(--color-bg-weak)] p-5 transition-colors hover:border-[var(--color-border)] hover:bg-[var(--color-bg-weak-hover)]"
+      className="group flex flex-col gap-4 rounded-xl border border-[var(--color-border-weak)] bg-[var(--color-bg-weak)] p-5 transition-all hover:border-[var(--color-border)] hover:bg-[var(--color-bg-weak-hover)] hover:shadow-sm"
     >
       <div className="flex items-start justify-between">
         <div className="flex flex-col gap-1">
@@ -117,7 +117,7 @@ function CategoryCounts() {
           <Link
             key={type}
             href={`/search?type=${type}`}
-            className="group flex flex-col gap-2 rounded border border-[var(--color-border-weak)] bg-[var(--color-bg-weak)] p-5 transition-colors hover:border-[var(--color-border)] hover:bg-[var(--color-bg-weak-hover)]"
+            className="group flex flex-col gap-2 rounded-xl border border-[var(--color-border-weak)] bg-[var(--color-bg-weak)] p-5 transition-all hover:border-[var(--color-border)] hover:bg-[var(--color-bg-weak-hover)] hover:shadow-sm"
           >
             <span className="text-sm font-medium text-[var(--color-text-strong)]">
               {typeInfo.labelPlural}
@@ -142,34 +142,39 @@ export default function Home() {
         <div className="mx-auto max-w-[67.5rem]">
           <div className="grid items-center gap-12 py-8 md:grid-cols-2 md:py-12">
             <div className="flex flex-col gap-6">
+              <div className="flex items-center gap-2 text-sm text-[var(--color-text-weak)]">
+                <span className="inline-block h-2 w-2 rounded-full bg-[var(--color-bg-interactive)]"></span>
+                Community-driven marketplace
+              </div>
               <h1 className="text-4xl font-semibold leading-tight tracking-tight text-[var(--color-text-strong)] md:text-5xl">
-                Extensions & plugins for OpenCode
+                Grab a seat, browse some extensions
               </h1>
               <p className="text-lg leading-relaxed text-[var(--color-text)]">
-                Discover community-built extensions and plugins to enhance your OpenCode
-                experience. Share your own creations and collaborate with developers worldwide.
+                A cozy corner of the internet where developers share extensions, plugins, 
+                and tools for OpenCode. Pull up a chair and explore what the community has brewed.
               </p>
               <div className="flex flex-col gap-4 pt-4 sm:flex-row">
                 <a
                   href="#extensions"
-                  className="inline-flex items-center justify-center rounded bg-[var(--color-bg-strong)] px-6 py-3 text-sm font-medium text-[var(--color-text-inverted)] transition-colors hover:bg-[var(--color-bg-strong-hover)]"
+                  className="inline-flex items-center justify-center rounded-lg bg-[var(--color-bg-strong)] px-6 py-3 text-sm font-medium text-[var(--color-text-inverted)] transition-all hover:bg-[var(--color-bg-strong-hover)] active:scale-[0.98]"
                 >
-                  Browse Extensions
+                  Browse the Menu
                 </a>
                 <Link
                   href="/submit"
-                  className="inline-flex items-center justify-center rounded border border-[var(--color-border)] px-6 py-3 text-sm font-medium text-[var(--color-text-strong)] transition-colors hover:bg-[var(--color-bg-weak)]"
+                  className="inline-flex items-center justify-center rounded-lg border border-[var(--color-border)] px-6 py-3 text-sm font-medium text-[var(--color-text-strong)] transition-all hover:bg-[var(--color-bg-weak)] active:scale-[0.98]"
                 >
-                  Submit Extension
+                  Share Your Creation
                 </Link>
               </div>
             </div>
-            <div className="relative mx-auto aspect-square w-full">
+            <div className="relative mx-auto aspect-square w-full max-w-md">
+              <div className="absolute inset-0 rounded-2xl bg-[var(--color-bg-interactive)] opacity-20 blur-3xl"></div>
               <Image
                 src="/opencode_cafe_image.jpg"
                 alt="OpenCode Cafe"
                 fill
-                className="object-contain"
+                className="relative rounded-2xl object-contain"
                 priority
               />
             </div>
@@ -182,8 +187,11 @@ export default function Home() {
         <div className="mx-auto max-w-[67.5rem]">
           <div className="mb-8">
             <h2 className="text-xl font-semibold text-[var(--color-text-strong)]">
-              Categories
+              On the Menu
             </h2>
+            <p className="mt-1 text-sm text-[var(--color-text-weak)]">
+              Browse by category
+            </p>
           </div>
           <CategoryCounts />
         </div>
@@ -194,8 +202,11 @@ export default function Home() {
         <div className="mx-auto max-w-[67.5rem]">
           <div className="mb-8">
             <h2 className="text-xl font-semibold text-[var(--color-text-strong)]">
-              All Extensions
+              Fresh from the Community
             </h2>
+            <p className="mt-1 text-sm text-[var(--color-text-weak)]">
+              All available extensions
+            </p>
           </div>
           <ExtensionsGrid />
         </div>
@@ -204,31 +215,34 @@ export default function Home() {
       {/* CTA */}
       <section className="border-b border-[var(--color-border-weak)] px-[var(--padding)] py-[var(--vertical-padding)]">
         <div className="mx-auto max-w-[67.5rem]">
-          <div className="flex flex-col items-center gap-6 py-8 text-center">
-            <h2 className="text-2xl font-semibold text-[var(--color-text-strong)]">
-              Build for the community
-            </h2>
-            <p className="max-w-lg text-[var(--color-text)]">
-              Create extensions and plugins that help developers work smarter. Share your
-              tools with thousands of OpenCode users.
-            </p>
-            <div className="flex gap-4">
-              <Authenticated>
-                <Link
-                  href="/submit"
-                  className="inline-flex items-center justify-center rounded bg-[var(--color-bg-strong)] px-6 py-3 text-sm font-medium text-[var(--color-text-inverted)] transition-colors hover:bg-[var(--color-bg-strong-hover)]"
-                >
-                  Submit Extension
-                </Link>
-              </Authenticated>
-              <Unauthenticated>
-                <Link
-                  href="/sign-in"
-                  className="inline-flex items-center justify-center rounded bg-[var(--color-bg-strong)] px-6 py-3 text-sm font-medium text-[var(--color-text-inverted)] transition-colors hover:bg-[var(--color-bg-strong-hover)]"
-                >
-                  Sign In to Submit
-                </Link>
-              </Unauthenticated>
+          <div className="relative overflow-hidden rounded-2xl bg-[var(--color-bg-weak)] p-8 md:p-12">
+            <div className="absolute right-0 top-0 h-64 w-64 -translate-y-1/2 translate-x-1/2 rounded-full bg-[var(--color-bg-interactive)] opacity-20 blur-3xl"></div>
+            <div className="relative flex flex-col items-center gap-6 text-center">
+              <h2 className="text-2xl font-semibold text-[var(--color-text-strong)]">
+                Got something brewing?
+              </h2>
+              <p className="max-w-lg text-[var(--color-text)]">
+                Share your extensions with the community. Whether it&apos;s an MCP server, 
+                a handy slash command, or a beautiful theme - we&apos;d love to feature it.
+              </p>
+              <div className="flex gap-4">
+                <Authenticated>
+                  <Link
+                    href="/submit"
+                    className="inline-flex items-center justify-center rounded-lg bg-[var(--color-bg-strong)] px-6 py-3 text-sm font-medium text-[var(--color-text-inverted)] transition-all hover:bg-[var(--color-bg-strong-hover)] active:scale-[0.98]"
+                  >
+                    Submit Your Extension
+                  </Link>
+                </Authenticated>
+                <Unauthenticated>
+                  <Link
+                    href="/sign-in"
+                    className="inline-flex items-center justify-center rounded-lg bg-[var(--color-bg-strong)] px-6 py-3 text-sm font-medium text-[var(--color-text-inverted)] transition-all hover:bg-[var(--color-bg-strong-hover)] active:scale-[0.98]"
+                  >
+                    Sign In to Submit
+                  </Link>
+                </Unauthenticated>
+              </div>
             </div>
           </div>
         </div>
