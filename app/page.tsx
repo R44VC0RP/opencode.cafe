@@ -31,7 +31,7 @@ function ExtensionCard({ extension }: { extension: {
             {extension.displayName}
           </span>
           <span className="text-xs text-[var(--color-text-weak)]">
-            by {extension.author.name}
+            Submitted by {extension.author.name}
           </span>
         </div>
         <Badge variant="secondary">{typeInfo?.label || extension.type}</Badge>

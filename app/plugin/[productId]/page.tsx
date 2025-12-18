@@ -62,7 +62,7 @@ function PluginContent({ productId }: { productId: string }) {
               )}
             </div>
             <p className="text-[var(--color-text-weak)]">
-              by {extension.author.name} · Published {formattedDate}
+              Submitted by {extension.author.name} · Published {formattedDate}
             </p>
           </div>
           <Badge variant="secondary">{typeInfo?.label || extension.type}</Badge>
@@ -173,7 +173,7 @@ function PluginContent({ productId }: { productId: string }) {
             <span className="text-sm text-[var(--color-text-strong)]">{typeInfo?.label || extension.type}</span>
           </div>
           <div className="flex flex-col gap-1">
-            <span className="text-xs text-[var(--color-text-weak)]">Author</span>
+            <span className="text-xs text-[var(--color-text-weak)]">Submitted by</span>
             <span className="text-sm text-[var(--color-text-strong)]">{extension.author.name}</span>
           </div>
           <div className="flex flex-col gap-1">

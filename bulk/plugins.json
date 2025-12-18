@@ -1,0 +1,132 @@
+[
+  {
+    "productId": "opencode-helicone-session",
+    "type": "plugin",
+    "displayName": "OpenCode Helicone Session",
+    "description": "Automatically inject Helicone session headers into LLM requests for request grouping in Helicone's dashboard",
+    "repoUrl": "https://github.com/H2Shami/opencode-helicone-session",
+    "homepageUrl": "https://github.com/H2Shami/opencode-helicone-session",
+    "tags": ["helicone", "analytics", "observability", "session-tracking"],
+    "installation": "## Installation\n\n```bash\nnpm install -g opencode-helicone-session\n# or\nbun add -g opencode-helicone-session\n```\n\nAdd the plugin to your `opencode.json`:\n\n```json\n{\n  \"$schema\": \"https://opencode.ai/config.json\",\n  \"plugin\": [\"opencode-helicone-session\"]\n}\n```"
+  },
+  {
+    "productId": "opencode-skills",
+    "type": "plugin",
+    "displayName": "OpenCode Skills",
+    "description": "Bring Anthropic's Agent Skills Specification (v1.0) to OpenCode with auto-discovery, spec compliance, dynamic tools, and nested skills support",
+    "repoUrl": "https://github.com/malhashemi/opencode-skills",
+    "homepageUrl": "https://github.com/malhashemi/opencode-skills",
+    "tags": ["skills", "anthropic", "agents", "dynamic-tools"],
+    "installation": "## Installation\n\nAdd to your `opencode.json` or `~/.config/opencode/opencode.json`:\n\n```json\n{\n  \"plugin\": [\"opencode-skills\"]\n}\n```\n\nOpenCode auto-installs plugins on startup.\n\n### Version Pinning\n\nPin to a specific version:\n\n```json\n{\n  \"plugin\": [\"opencode-skills@x.y.z\"]\n}\n```"
+  },
+  {
+    "productId": "opencode-type-inject",
+    "type": "plugin",
+    "displayName": "OpenCode Type Inject",
+    "description": "Auto-inject TypeScript and Svelte types into file reads with lookup tools, token budget management, and import resolution",
+    "repoUrl": "https://github.com/nick-vi/opencode-type-inject",
+    "homepageUrl": "https://github.com/nick-vi/opencode-type-inject",
+    "tags": ["typescript", "svelte", "types", "developer-tools"],
+    "installation": "## Installation\n\nAdd to your `opencode.json`:\n\n```json\n{\n  \"plugin\": [\"@nick-vi/opencode-type-inject\"]\n}\n```"
+  },
+  {
+    "productId": "opencode-openai-codex-auth",
+    "type": "plugin",
+    "displayName": "OpenCode OpenAI Codex Auth",
+    "description": "Use your ChatGPT Plus/Pro subscription instead of API credits with OAuth authentication for OpenAI's Codex backend",
+    "repoUrl": "https://github.com/numman-ali/opencode-openai-codex-auth",
+    "homepageUrl": "https://numman-ali.github.io/opencode-openai-codex-auth/",
+    "tags": ["openai", "chatgpt", "oauth", "authentication", "codex"],
+    "installation": "## Installation\n\nAdd to your `opencode.json`:\n\n```json\n{\n  \"$schema\": \"https://opencode.ai/config.json\",\n  \"plugin\": [\"opencode-openai-codex-auth@4.1.1\"]\n}\n```\n\nThen run:\n\n```bash\nopencode auth login\n```\n\nSelect \"OpenAI\" → \"ChatGPT Plus/Pro (Codex Subscription)\"\n\nSee the [full configuration](https://github.com/numman-ali/opencode-openai-codex-auth/blob/main/config/full-opencode.json) for all model variants."
+  },
+  {
+    "productId": "opencode-gemini-auth",
+    "type": "plugin",
+    "displayName": "OpenCode Gemini Auth",
+    "description": "Use your existing Gemini plan instead of API billing with Google OAuth authentication",
+    "repoUrl": "https://github.com/jenslys/opencode-gemini-auth",
+    "homepageUrl": "https://www.npmjs.com/package/opencode-gemini-auth",
+    "tags": ["google", "gemini", "oauth", "authentication"],
+    "installation": "## Installation\n\nAdd the plugin to your OpenCode config:\n\n```json\n{\n  \"$schema\": \"https://opencode.ai/config.json\",\n  \"plugin\": [\"opencode-gemini-auth\"]\n}\n```\n\nThen run:\n\n```bash\nopencode auth login\n```\n\nChoose the Google provider and select **OAuth with Google (Gemini CLI)**."
+  },
+  {
+    "productId": "opencode-antigravity-auth",
+    "type": "plugin",
+    "displayName": "OpenCode Antigravity Auth",
+    "description": "Use Antigravity's free models with multi-account load balancing, automatic endpoint fallback, and access to models like Gemini 3 Pro and Claude via Google credentials",
+    "repoUrl": "https://github.com/NoeFabris/opencode-antigravity-auth",
+    "homepageUrl": "https://github.com/NoeFabris/opencode-antigravity-auth",
+    "tags": ["google", "antigravity", "oauth", "authentication", "gemini", "claude"],
+    "installation": "## Installation\n\nAdd the plugin to your OpenCode config:\n\n```json\n{\n  \"plugin\": [\"opencode-antigravity-auth@1.1.4\"]\n}\n```\n\nThen run:\n\n```bash\nopencode auth login\n```\n\nSelect **Google** as the provider and **OAuth with Google (Antigravity)**."
+  },
+  {
+    "productId": "opencode-google-antigravity-auth",
+    "type": "plugin",
+    "displayName": "OpenCode Google Antigravity Auth",
+    "description": "Google Antigravity OAuth Plugin with multi-account load balancing, Google Search tool, cross-model conversations, and interleaved thinking support",
+    "repoUrl": "https://github.com/shekohex/opencode-google-antigravity-auth",
+    "homepageUrl": "https://www.npmjs.com/package/opencode-google-antigravity-auth",
+    "tags": ["google", "antigravity", "oauth", "authentication", "search", "claude"],
+    "installation": "## Installation\n\nAdd the plugin to your OpenCode config:\n\n```json\n{\n  \"$schema\": \"https://opencode.ai/config.json\",\n  \"plugin\": [\"opencode-google-antigravity-auth\"]\n}\n```\n\nThen run:\n\n```bash\nopencode auth login\n```\n\nChoose the Google provider and select **OAuth with Google (Antigravity)**."
+  },
+  {
+    "productId": "opencode-dynamic-context-pruning",
+    "type": "plugin",
+    "displayName": "OpenCode Dynamic Context Pruning",
+    "description": "Optimize token usage by intelligently pruning obsolete tool outputs from conversation history with deduplication, prune tool, and on-idle analysis",
+    "repoUrl": "https://github.com/Opencode-DCP/opencode-dynamic-context-pruning",
+    "homepageUrl": "https://github.com/Opencode-DCP/opencode-dynamic-context-pruning",
+    "tags": ["context", "token-optimization", "pruning", "deduplication"],
+    "installation": "## Installation\n\nAdd to your OpenCode config:\n\n```json\n{\n  \"plugin\": [\"@tarquinen/opencode-dcp@latest\"]\n}\n```\n\nUsing `@latest` ensures you always get the newest version automatically when OpenCode starts.\n\nRestart OpenCode. The plugin will automatically start optimizing your sessions."
+  },
+  {
+    "productId": "opencode-websearch-cited",
+    "type": "plugin",
+    "displayName": "OpenCode Websearch Cited",
+    "description": "Add native websearch support with inline citations and source lists for supported providers using Google grounded style",
+    "repoUrl": "https://github.com/ghoulr/opencode-websearch-cited",
+    "homepageUrl": "https://github.com/ghoulr/opencode-websearch-cited",
+    "tags": ["websearch", "citations", "google", "openai", "openrouter"],
+    "installation": "## Installation\n\nAdd `opencode-websearch-cited` to your `~/.config/opencode/opencode.json`.\n\n**IMPORTANT**: Put `opencode-websearch-cited` LAST in the `plugin` list to avoid impacting other plugins' auth process.\n\n```json\n{\n  \"$schema\": \"https://opencode.ai/config.json\",\n  \"plugin\": [\n    \"...other plugins\",\n    \"opencode-websearch-cited@1.1.1\"\n  ]\n}\n```\n\nThen configure a `websearch_cited` model in your provider options."
+  },
+  {
+    "productId": "opencode-pty",
+    "type": "plugin",
+    "displayName": "OpenCode PTY",
+    "description": "Enable AI agents to run background processes in a PTY, send interactive input, and read output with regex filtering",
+    "repoUrl": "https://github.com/shekohex/opencode-pty",
+    "homepageUrl": "https://github.com/shekohex/opencode-pty",
+    "tags": ["pty", "terminal", "background-processes", "interactive"],
+    "installation": "## Installation\n\nAdd the plugin to your OpenCode config:\n\n```json\n{\n  \"$schema\": \"https://opencode.ai/config.json\",\n  \"plugin\": [\"opencode-pty\"]\n}\n```\n\nThat's it. OpenCode will automatically install the plugin on next run."
+  },
+  {
+    "productId": "opencode-wakatime",
+    "type": "plugin",
+    "displayName": "OpenCode WakaTime",
+    "description": "Track OpenCode usage with WakaTime including automatic CLI management, detailed file tracking, and AI coding metrics",
+    "repoUrl": "https://github.com/angristan/opencode-wakatime",
+    "homepageUrl": "https://github.com/angristan/opencode-wakatime",
+    "tags": ["wakatime", "analytics", "time-tracking", "productivity"],
+    "installation": "## Installation\n\nEnsure you have a WakaTime API key configured in `~/.wakatime.cfg`:\n\n```ini\n[settings]\napi_key = waka_your_api_key_here\n```\n\nClone, build, and symlink the plugin:\n\n```bash\ngit clone https://github.com/angristan/opencode-wakatime\ncd opencode-wakatime\nnpm install && npm run build\n\nmkdir -p ~/.config/opencode/plugin\nln -s \"$(pwd)/dist/index.js\" ~/.config/opencode/plugin/wakatime.js\n```"
+  },
+  {
+    "productId": "opencode-md-table-formatter",
+    "type": "plugin",
+    "displayName": "OpenCode Markdown Table Formatter",
+    "description": "Clean up markdown tables produced by LLMs with concealment mode support, alignment handling, and code block preservation",
+    "repoUrl": "https://github.com/franlol/opencode-md-table-formatter",
+    "homepageUrl": "https://github.com/franlol/opencode-md-table-formatter",
+    "tags": ["markdown", "tables", "formatting", "llm-output"],
+    "installation": "## Installation\n\nAdd the plugin to your `.opencode/opencode.jsonc`:\n\n```json\n{\n  \"plugin\": [\"@franlol/opencode-md-table-formatter@0.0.3\"]\n}\n```"
+  },
+  {
+    "productId": "oh-my-opencode",
+    "type": "plugin",
+    "displayName": "Oh My OpenCode",
+    "description": "Battery-included plugin with background agents, pre-built LSP/AST/MCP tools, curated agents with proper models, and Claude Code compatibility layer",
+    "repoUrl": "https://github.com/code-yeongyu/oh-my-opencode",
+    "homepageUrl": "https://github.com/code-yeongyu/oh-my-opencode",
+    "tags": ["agents", "lsp", "ast", "mcp", "claude-code", "orchestration"],
+    "installation": "## Installation\n\nAdd to your OpenCode config:\n\n```bash\nmkdir -p ~/.config/opencode\n```\n\nIf `~/.config/opencode/opencode.json` exists, add `oh-my-opencode` to the plugin array. Otherwise create:\n\n```json\n{\n  \"plugin\": [\"oh-my-opencode\"]\n}\n```\n\nThen run:\n\n```bash\nopencode auth login\n```\n\nConfigure authentication for your preferred providers (Anthropic, Google, OpenAI)."
+  }
+]
