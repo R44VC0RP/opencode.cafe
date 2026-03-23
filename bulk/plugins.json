@@ -128,5 +128,15 @@
     "homepageUrl": "https://github.com/code-yeongyu/oh-my-opencode",
     "tags": ["agents", "lsp", "ast", "mcp", "claude-code", "orchestration"],
     "installation": "## Installation\n\nAdd to your OpenCode config:\n\n```bash\nmkdir -p ~/.config/opencode\n```\n\nIf `~/.config/opencode/opencode.json` exists, add `oh-my-opencode` to the plugin array. Otherwise create:\n\n```json\n{\n  \"plugin\": [\"oh-my-opencode\"]\n}\n```\n\nThen run:\n\n```bash\nopencode auth login\n```\n\nConfigure authentication for your preferred providers (Anthropic, Google, OpenAI)."
+  },
+  {
+    "productId": "opencode-tts",
+    "type": "plugin",
+    "displayName": "OpenCode TTS",
+    "description": "Speak idle assistant responses aloud with summary or full-text modes, slash commands, and local Edge TTS or system voice backends",
+    "repoUrl": "https://github.com/StefanoChiodino/opencode-tts",
+    "homepageUrl": "https://github.com/StefanoChiodino/opencode-tts",
+    "tags": ["tts", "voice", "audio", "summaries", "notifications"],
+    "installation": "## Installation\n\nAdd the plugin to your OpenCode config:\n\n```json\n{\n  \"$schema\": \"https://opencode.ai/config.json\",\n  \"plugin\": [\"opencode-tts\"]\n}\n```\n\nRestart OpenCode. The plugin will auto-speak each idle assistant response, and you can control it with `/tts-on`, `/tts-off`, `/tts-mode-summary`, `/tts-mode-full`, and `/tts-repeat`."
   }
 ]
