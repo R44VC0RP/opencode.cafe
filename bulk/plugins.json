@@ -203,7 +203,7 @@
     "installation": "## Installation\n\nAdd to your OpenCode config:\n\n```bash\nmkdir -p ~/.config/opencode\n```\n\nIf `~/.config/opencode/opencode.json` exists, add `oh-my-opencode` to the plugin array. Otherwise create:\n\n```json\n{\n  \"plugin\": [\"oh-my-opencode\"]\n}\n```\n\nThen run:\n\n```bash\nopencode auth login\n```\n\nConfigure authentication for your preferred providers (Anthropic, Google, OpenAI)."
   },
   {
-    "productId": "opencode-delegation-enforcer",
+    "productId": "thesaver",
     "type": "plugin",
     "displayName": "theSaver",
     "description": "Cost-aware delegation enforcer with three-tier model routing, prompt-cache tracking, ROI reporting, and a trinity CLI for brain/medium/cheap slot switching",
@@ -216,6 +216,6 @@
       "roi",
       "trinity"
     ],
-    "installation": "## Installation\n\nAdd to your `opencode.json`:\n\n```json\n{\n  \"plugin\": [\"opencode-delegation-enforcer\"]\n}\n```\n\nOr copy manually:\n\n```bash\nmkdir -p ~/.config/opencode/plugins\ncp src/index.js ~/.config/opencode/plugins/delegation-enforcer.js\n```\n\nAdd the plugin path to your `opencode.json`:\n\n```json\n{\n  \"plugin\": [\"./plugins/delegation-enforcer.js\"]\n}\n```"
+    "installation": "## Installation\n\nnpm install opencode-delegation-enforcer\n\nOr clone:\n\n"
   }
 ]
