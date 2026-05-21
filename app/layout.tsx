@@ -26,6 +26,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script
+          src="https://cdn.visitors.now/v.js"
+          data-token="6aaf428f-715f-4a77-a240-342aa165d595"
+        ></script>
+      </head>
       <body className={`${inter.variable} antialiased`}>
         <ClerkProvider appearance={{ baseTheme: dark }}>
           <ConvexClientProvider>{children}</ConvexClientProvider>
