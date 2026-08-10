@@ -128,5 +128,15 @@
     "homepageUrl": "https://github.com/code-yeongyu/oh-my-opencode",
     "tags": ["agents", "lsp", "ast", "mcp", "claude-code", "orchestration"],
     "installation": "## Installation\n\nAdd to your OpenCode config:\n\n```bash\nmkdir -p ~/.config/opencode\n```\n\nIf `~/.config/opencode/opencode.json` exists, add `oh-my-opencode` to the plugin array. Otherwise create:\n\n```json\n{\n  \"plugin\": [\"oh-my-opencode\"]\n}\n```\n\nThen run:\n\n```bash\nopencode auth login\n```\n\nConfigure authentication for your preferred providers (Anthropic, Google, OpenAI)."
+  },
+  {
+    "productId": "opencode-focus",
+    "type": "plugin",
+    "displayName": "OpenCode Focus",
+    "description": "Status-aware terminal titles with spinner/state, minimal desktop notifications and click-to-focus window (GNOME) for the opencode TUI. Requires a Linux graphical session with notify-send; opencode >= 1.18; GNOME Shell 45-49 for the optional extension",
+    "repoUrl": "https://github.com/kivervinicius/opencode-focus",
+    "homepageUrl": "https://www.npmjs.com/package/opencode-focus",
+    "tags": ["title", "notifications", "tui", "gnome", "focus", "wayland"],
+    "installation": "## Installation\n\n### Requirements\n- Linux graphical session with `notify-send` (libnotify package)\n- opencode >= 1.18\n- GNOME Shell 45-49 for the optional GNOME extension (focus suppression and click-to-focus)\n\nInstall the plugins (server + TUI):\n\n```bash\nopencode plugin opencode-focus --global\n```\n\nRestart opencode to load.\n\n### GNOME extension (optional, recommended)\n\nEnables focus-based notification suppression and click-to-focus:\n\n```bash\nnpx opencode-focus setup\n```\n\nLog out/in so GNOME Shell discovers the extension, then validate with `npx opencode-focus status`."
   }
 ]
