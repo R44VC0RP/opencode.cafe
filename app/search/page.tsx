@@ -27,9 +27,9 @@ function ExtensionCard({ extension }: { extension: {
   return (
     <Link
       href={`/plugin/${extension.productId}`}
-      className="group flex flex-col gap-4 rounded border border-[var(--color-border-weak)] bg-[var(--color-bg-weak)] p-5 transition-colors hover:border-[var(--color-border)] hover:bg-[var(--color-bg-weak-hover)]"
+      className="group flex min-w-0 flex-col gap-4 rounded border border-[var(--color-border-weak)] bg-[var(--color-bg-weak)] p-5 wrap-anywhere transition-colors hover:border-[var(--color-border)] hover:bg-[var(--color-bg-weak-hover)]"
     >
-      <div className="flex items-start justify-between">
+      <div className="flex items-start justify-between gap-2">
         <div className="flex flex-col gap-1">
           <span className="font-medium text-[var(--color-text-strong)]">
             {extension.displayName}
@@ -38,7 +38,9 @@ function ExtensionCard({ extension }: { extension: {
             Submitted by {extension.author.name}
           </span>
         </div>
-        <Badge variant="secondary">{typeInfo?.label || extension.type}</Badge>
+        <Badge variant="secondary" className="shrink-0">
+          {typeInfo?.label || extension.type}
+        </Badge>
       </div>
       <p className="text-sm leading-relaxed text-[var(--color-text)] line-clamp-2">
         {extension.description}
