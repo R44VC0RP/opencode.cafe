@@ -128,5 +128,15 @@
     "homepageUrl": "https://github.com/code-yeongyu/oh-my-opencode",
     "tags": ["agents", "lsp", "ast", "mcp", "claude-code", "orchestration"],
     "installation": "## Installation\n\nAdd to your OpenCode config:\n\n```bash\nmkdir -p ~/.config/opencode\n```\n\nIf `~/.config/opencode/opencode.json` exists, add `oh-my-opencode` to the plugin array. Otherwise create:\n\n```json\n{\n  \"plugin\": [\"oh-my-opencode\"]\n}\n```\n\nThen run:\n\n```bash\nopencode auth login\n```\n\nConfigure authentication for your preferred providers (Anthropic, Google, OpenAI)."
+  },
+  {
+    "productId": "opencode-shield-bash",
+    "type": "plugin",
+    "displayName": "OpenCode Shield Bash",
+    "description": "Gate every bash tool call through a second judge session that returns an allow/deny verdict from a fixed safety policy before the command runs",
+    "repoUrl": "https://github.com/acramsay/opencode-shield-bash",
+    "homepageUrl": "https://www.npmjs.com/package/@acramsay/opencode-shield-bash",
+    "tags": ["bash", "security", "safety", "policy", "guardrails", "tool-gating"],
+    "installation": "## Installation\n\nAdd the plugin to your OpenCode config:\n\n```json\n{\n  \"$schema\": \"https://opencode.ai/config.json\",\n  \"plugin\": [\"@acramsay/opencode-shield-bash\"]\n}\n```\n\nopencode installs npm plugins with Bun at startup; the package ships TypeScript with no build step.\n\n### Judge configuration\n\nThe judge session needs a provider and model. Create `shield-bash.json` in your opencode config directory:\n\n```json\n{\n  \"providerID\": \"vercel\",\n  \"modelID\": \"zai/glm-5.3-flash\",\n  \"failure\": \"deny\"\n}\n```\n\nRestart OpenCode. Every bash call is now judged before it runs; denials surface in the calling session with the reason."
   }
 ]
