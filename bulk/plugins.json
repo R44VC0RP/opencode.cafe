@@ -133,7 +133,7 @@
     "productId": "opencode-shield-bash",
     "type": "plugin",
     "displayName": "OpenCode Shield Bash",
-    "description": "Gate every bash tool call through a second judge session that returns an allow/deny verdict from a fixed safety policy before the command runs",
+    "description": "Gate bash calls through an LLM judge subagent session to allow or deny their execution",
     "repoUrl": "https://github.com/acramsay/opencode-shield-bash",
     "homepageUrl": "https://www.npmjs.com/package/@acramsay/opencode-shield-bash",
     "tags": ["bash", "security", "safety", "policy", "guardrails", "tool-gating"],
