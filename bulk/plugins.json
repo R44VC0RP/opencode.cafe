@@ -128,5 +128,15 @@
     "homepageUrl": "https://github.com/code-yeongyu/oh-my-opencode",
     "tags": ["agents", "lsp", "ast", "mcp", "claude-code", "orchestration"],
     "installation": "## Installation\n\nAdd to your OpenCode config:\n\n```bash\nmkdir -p ~/.config/opencode\n```\n\nIf `~/.config/opencode/opencode.json` exists, add `oh-my-opencode` to the plugin array. Otherwise create:\n\n```json\n{\n  \"plugin\": [\"oh-my-opencode\"]\n}\n```\n\nThen run:\n\n```bash\nopencode auth login\n```\n\nConfigure authentication for your preferred providers (Anthropic, Google, OpenAI)."
+  },
+  {
+    "productId": "opencode-stay-awake",
+    "type": "plugin",
+    "displayName": "OpenCode Stay Awake",
+    "description": "Keep the computer awake only while an OpenCode session is generating, and let it sleep again the moment the work is done",
+    "repoUrl": "https://github.com/AuroraAeon/opencode-stay-awake",
+    "homepageUrl": "https://www.npmjs.com/package/opencode-stay-awake",
+    "tags": ["sleep", "keep-awake", "power-management", "macos", "linux"],
+    "installation": "## Installation\n\n```bash\nopencode plugin add opencode-stay-awake\n```\n\nThen restart the app (or run `opencode reload`) so the running server picks it up.\n\nOr add it to your `opencode.json`:\n\n```json\n{\n  \"$schema\": \"https://opencode.ai/config.json\",\n  \"plugin\": [\"opencode-stay-awake\"]\n}\n```\n\n### Options\n\n```json\n{ \"plugin\": [[\"opencode-stay-awake\", { \"graceMs\": 5000 }]] }\n```\n\nOptions are only delivered from the global config (`~/.config/opencode/opencode.json`).\n\nmacOS uses `caffeinate -dims -w <server pid>`, Linux uses `systemd-inhibit`, and every inhibitor is bound to the server pid so a crashed server can never wedge the machine awake. Other platforms are an inert no-op."
   }
 ]
